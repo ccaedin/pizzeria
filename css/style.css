@@ -1,0 +1,77 @@
+html,
+body {
+    margin: 0;
+    width: 100%;
+    height: 100%;
+}
+.r_btn {
+    background: #B73028;
+}
+
+.container {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    padding: 2vh 0;
+    background-color: grey;
+}
+
+.content {
+    background-color: aqua;
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+    row-gap: 10%;
+}
+.content > row {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+#textContent {
+    text-align: center;
+    font-size: x-large;
+    padding-top: 10%;
+}
+#tab_container {
+    align-self: center;
+    width: 65%;
+    background-color: aliceblue;
+    height: 40%;
+}
+#tabs {
+    display: flex;
+    justify-content: center;
+    background-color: grey;
+    height: 5vh;
+}
+#tabs button {
+    flex-grow: 1;
+    height: 100%;
+    width: 100%;
+    background-color: lightgray;
+}
+#tabs button.active {
+    background-color: white;
+}
+
+#tabs_content div {
+    height: 100%;
+}
+/* oscura el tab contenido que no es activa */
+#tabs_content > div:not(.active) {
+    display: none;
+}
+
+#tab_domicilio_content {
+    padding: 5%;
+    display: flex;
+    flex-direction: column;
+}
