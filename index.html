@@ -42,10 +42,13 @@
                     </ul>
                     <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
                         <li class="nav-item">
-                            <a class="nav-link active" aria-current="page" href="#">Home</a>
+                            <a class="nav-link active" aria-current="page" href="./index.html">Home</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="#">Promociones</a>
+                            <a class="nav-link" aria-current="page" href="./carta.html">Carta</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="./carta.html#promociones">Promociones</a>
                         </li>
                         <li id="nav-profile" class="nav-item">
                             <a class="nav-link" href="#">Iniciar sesión</a>
@@ -119,19 +122,60 @@
             <div class="">
                 <h1>Descrube nuestras ofertas</h1>
                 <div id="ofertas" class="row">
-                    <div class="col-3">
+                    <div class="col-3 d-flex align-items-stretch">
                         <div class="oferta card">
                             <img class="card-img-top" src="./images/barbacoa.jpeg" alt="barbacoa">
                             <div class="card-body pb-2">
-                                <h5 class="card-title">Barbacoa</h5>
+                                <h5 class="card-title">El Triple</h5>
                                 <p class="card-text mb-0">
                                     Elige 3 medianas (hasta 5 igredientes) desde 8,95€ c/u
                                 </p>
                                 <a href="#" class="card-link">Ver Más</a>
                             </div>
-                            <a href="#" class="btn btn-danger p-1 mx-2 mb-2">Pedir</a>
+                            <button href="#" class="btn btn-danger p-1 mx-2 mb-2" onclick="addToCart('eltriple')">Pedir</button>
                         </div>
                     </div>
+                    <div class="col-3 d-flex align-items-stretch">
+                        <div class="oferta card">
+                            <img class="card-img-top" src="./images/barbacoa.jpeg" alt="barbacoa">
+                            <div class="card-body pb-2">
+                                <h5 class="card-title">El Doble</h5>
+                                <p class="card-text mb-0">
+                                    Elige una mediana y recibe otra gratis
+                                </p>
+                                <a href="#" class="card-link">Ver Más</a>
+                            </div>
+                            <button href="#" class="btn btn-danger p-1 mx-2 mb-2" onclick="addToCart('eldoble')">Pedir</button>
+                        </div>
+                    </div>
+                    <div class="col-3 d-flex align-items-stretch">
+                        <div class="oferta card">
+                            <img class="card-img-top" src="./images/barbacoa.jpeg" alt="barbacoa">
+                            <div class="card-body pb-2">
+                                <h5 class="card-title">2 Refrescos</h5>
+                                <p class="card-text mb-0">
+                                    Elige 2 refrescos de 2L por 3,95€ c/u
+                                </p>
+                                <a href="#" class="card-link">Ver Más</a>
+                            </div>
+                            <button href="#" class="btn btn-danger p-1 mx-2 mb-2" onclick="addToCart('2refrescos')">Pedir</button>
+                        </div>
+                    </div>
+                    <div class="col-3 d-flex align-items-stretch">
+                        <div class="oferta card">
+                            <img class="card-img-top" src="./images/barbacoa.jpeg" alt="barbacoa">
+                            <div class="card-body pb-2">
+                                <h5 class="card-title">El Dulce</h5>
+                                <p class="card-text mb-0">
+                                    Elige un pizza, postre, y refresco por 12,95€
+                                </p>
+                                <a href="#" class="card-link">Ver Más</a>
+                            </div>
+                            <button href="#" class="btn btn-danger p-1 mx-2 mb-2" onclick="addToCart('eldulce')">Pedir</button>
+                        </div>
+                    </div>
+                    
+                    
 
 
                 </div>
