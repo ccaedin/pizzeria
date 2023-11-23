@@ -1,0 +1,10 @@
+.card {
+    font-size: 70%;
+}
+
+#tab_container {
+    flex: 2;
+}
+#ofertas {
+    flex: 1;
+}
