@@ -42,10 +42,10 @@
                     </ul>
                     <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
                         <li class="nav-item">
-                            <a class="nav-link active" aria-current="page" href="#">Home</a>
+                            <a class="nav-link active" aria-current="page" href="./index.html">Home</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link active" aria-current="page" href="./carta.html">Carta</a>
+                            <a class="nav-link" aria-current="page" href="./carta.html">Carta</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" href="./carta.html#promociones">Promociones</a>
@@ -60,22 +60,91 @@
                 </div>
             </div>
         </nav>
+        <div class="container">
+            <div id="basket">
+                <div class="header">
+                    <h6 class="display-3 d-inline">Basket </h6>
+                    <p class="fs-5 d-inline">3 items</p>
+                </div>
+                <hr>
+                <div class="row row-gap-3">
+                    <div hidden id="items" class="col-lg-8 col-sm-12">
+                        <div class="card mt-2">
+                            <div class="row">
+                                <div class="col-4">
+                                    <img class="card-img-top" src="./images/barbacoa.jpeg" alt="Card image cap">
+                                </div>
+                                <div class="col-8">
+                                    <div class="card-body pb-2">
+                                        <h5 class="card-title">El Triple</h5>
+                                        <h6 class="card-subtitle text-body-secondary">5,30€</h6>
+                                        <p class="card-text">
+                                            <label> Quantity: </label><br>
+                                            <input type="number" value="1" min="1" max="10" disabled>
+                                            <i class="fa fa-edit"></i>
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
 
-        <!-- Footer -->
-        <footer class="d-flex flex-wrap justify-content-between align-items-center py-2 my-3 border-top">
-            <div class="col-md-4 d-flex align-items-center">
-              <span class="text-muted">© 2023 Pizzería</span>
+                    </div>
+                    <div class="col-lg-8 col-sm-12">
+                        <div class="card mt-2">
+                            <div class="row">
+                                <div class="col-6">
+                                    <div class="card-body pb-2">
+                                        <h5 class="card-title">Método de pago</h5>
+                                        <p class="card-text">
+                                            <input type="radio" id="en_efectivo" name="metodo_pago" value="en_efectivo">
+                                            <label for="en_efectivo">En efectivo</label><br>
+                                            <input type="radio" id="con_tarjeta" name="metodo_pago" value="con_tarjeta">
+                                            <label for="con_tarjeta">Con tarjeta</label>
+                                        </p>
+                                    </div>
+                                </div>
+                                <div class="col-6">
+                                    <p class="card-body">
+                                        <input placeholder="CCV" type="text" id="ccv" name="ccv" maxlength="3" size="3">
+                                        <input placeholder="Fecha caducidad" type="date" id="date" name="date">
+                                        <br>
+                                        <input placeholder="Número de tarjeta" type="text" id="numero_tarjeta" name="numero_tarjeta" maxlength="16" size="16">
+
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-4 col-sm-12">
+                        <div class="card">
+                            <h3 class="card-header">Resumen</h3>
+                            <div class="card-body">
+                                <p class="card-text">Subtotal: <span id="subtotal">26,85</span>€</p>
+                                <p class="card-text">Envío: <span id="delivery">26,85</span>€</p>
+                                <p class="card-text">Total: <span id="total">26,85</span>€</p>
+                                <a href="#" class="btn btn-danger">Continuar a pago</a>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
             </div>
-        
-            <ul class="nav col-md-4 justify-content-end list-unstyled d-flex">
-              <li class="ms-3"><a class="fa fa-github text-muted " href="https://github.com/ccaedin/pizzeria"></a></li>
-            </ul>
-          </footer>
-    </div>
+            <!-- Footer -->
+            <footer class="d-flex flex-wrap justify-content-between align-items-center py-2 my-3 border-top">
+                <div class="col-md-4 d-flex align-items-center">
+                    <span class="text-muted">© 2023 Pizzería</span>
+                </div>
 
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
-        integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
-        crossorigin="anonymous"></script>
+                <ul class="nav col-md-4 justify-content-end list-unstyled d-flex">
+                    <li class="ms-3"><a class="fa fa-github text-muted " href="https://github.com/ccaedin/pizzeria"></a>
+                    </li>
+                </ul>
+            </footer>
+        </div>
+
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
+            integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
+            crossorigin="anonymous"></script>
 </body>
 
 </html>
