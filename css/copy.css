@@ -1,10 +1,7 @@
+html,
+body {
+    height: 100%;
+}
 .card {
     font-size: 70%;
-}
-
-#tab_container {
-    flex: 2;
-}
-#ofertas {
-    flex: 1;
 }
