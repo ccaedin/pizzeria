@@ -1,7 +1,17 @@
 document.addEventListener("DOMContentLoaded", function() {
     document.getElementById("addressForm").addEventListener("submit", handleAddress);
-
 });
+
+document.addEventListener("DOMContentLoaded", function() {
+    const rememberMeCheckbox = document.getElementById('rememberMe');
+    rememberMeCheckbox.checked = Cookies.get('rememberMe') === 'true';
+
+    rememberMeCheckbox.addEventListener('change', function () {
+        // Guardar el estado en la cookie
+        Cookies.set('rememberMe', rememberMeCheckbox.checked, { expires: 7 });
+    });
+});
+
 let autocomplete
 function initMap() {
  autocomplete = new google.maps.places.Autocomplete(
