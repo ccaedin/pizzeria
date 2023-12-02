@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pizzeria</title>
+    
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link id="theme" rel="stylesheet" href="./css/copy.css">
+    <link rel="stylesheet" type="text/css" href="/css/style.css">
+</head>
+
+<body>
+    <!-- Este es la cabezera -->
+    <div class="container-fluid">
+        <nav class="navbar  sticky-top navbar-expand-lg bg-body-tertiary">
+            <div class="container-fluid">
+                <a class="navbar-brand" href="#">Pizzería</a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                    data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
+                    aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                    <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
+                                aria-expanded="false">
+                                Who we are
+                            </a>
+                            <ul class="dropdown-menu">
+                                <li><a class="dropdown-item" href="#">Establecimientos</a></li>
+                                <li><a class="dropdown-item" href="#">Atención al Cliente</a></li>
+                                <li><a class="dropdown-item" href="#">Aceca de</a></li>
+                                <li>
+                                    <hr class="dropdown-divider">
+                                </li>
+                            </ul>
+                        </li>
+                    </ul>
+                    <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+                        <li class="nav-item">
+                            <a class="nav-link active" aria-current="page" href="./index.html">Home</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" aria-current="page" href="./carta.html">Carta</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="./carta.html#promociones">Promociones</a>
+                        </li>
+                        <li id="nav-profile" class="nav-item">
+                            <a class="nav-link" href="#">Iniciar sesión</a>
+                        </li>
+                        <li class="nav-item">
+                            <button id="btn_cart" class="btn btn-danger" type="button">Carrito</button>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+        <!-- Este es la contenido -->
+        <div class="columna-pagina1">
+            <div class="product">
+                <img src="/images/carbonara.jpeg" alt="Café" class="imagen_pequena"> <br>
+                <span class="texto">Carbonara - 8.95 €</span> <br>
+                <button class="add-button" data-product="Carbonara">Añadir</button>
+                <button class="remove-button" data-product="Carbonara">Quitar</button>
+            </div>
+            <div class="product">
+              <img src="/images/hawaiian.jpeg" alt="Churro" class="imagen_pequena"> <br>
+              <span class="texto">Churro - 7.95 €</span> <br>
+              <button class="add-button" data-product="Hawaiian">Añadir</button>
+              <button class="remove-button" data-product="Hawaiian">Quitar</button>
+            </div>
+            <div class="product">
+              <img src="/images/barbacoa.jpeg" alt="Trozo de Tarta" class="imagen_pequena"> <br>
+              <span class="texto">Trozo de Tarta - 9.95 €</span> <br>
+              <button class="add-button" data-product="Barbacoa">Añadir</button>
+              <button class="remove-button" data-product="Barbacoa">Quitar</button>
+            </div>
+        </div>
+        <div class="bloque_superior_derecha">
+            <div class="cart">
+              <ul class="cart-list">
+                <!-- La lista de productos en el carro se generará aquí -->
+              </ul>
+            </div>
+            <button class="checkout">Realizar Pedido</button>
+        </div>
+    </div>
+    <!-- Footer -->
+    <footer class="mt-auto pt-3 border-top">
+        <p class="text-center text-muted">© 2021 Pizzeria</p>
+        <ul class="nav justify-content-between border-bottom pb-3 px-5 bg-secondary">
+            <li class="nav-item"><a href="./carta.html" class="nav-link px-2 text-muted">Home</a></li>
+            <li class="nav-item"><a href="./carta.html" class="nav-link px-2 text-muted">Productos</a></li>
+            <li class="nav-item"><a href="./carta.html" class="nav-link px-2 text-muted">Nutricion y calidad</a></li>
+            <li class="nav-item"><a href="./privacy.html" class="nav-link px-2 text-muted">Aviso legal</a></li>
+            <li class="nav-item"><a href="./privacy.html" class="nav-link px-2 text-muted">Privacidad</a></li>
+        </ul>
+    </footer>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
+        crossorigin="anonymous"></script>
+
+    <script src="/script/menu.js"></script>
+    <script src="/script/migas_de_pan"></script>
+    <script src="/script/carrito_compra"></script>
+</body>
+
+</html>

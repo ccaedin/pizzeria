@@ -1,0 +1,60 @@
+document.addEventListener("DOMContentLoaded", () => {
+    const addButton = document.querySelectorAll(".add-button");
+    const removeButton = document.querySelectorAll(".remove-button");
+    const cartList = document.querySelector(".cart-list"); // Elemento de la lista de compra
+    const checkoutButton = document.querySelector(".checkout");
+
+    // Inicializa el carro de compras en el almacenamiento local
+    let cart = JSON.parse(localStorage.getItem("cart")) || {};
+
+    // Actualiza la lista de compra
+    function updateCartList() {
+        cartList.innerHTML = ""; // Borra el contenido anterior de la lista
+        for (const product in cart) {
+            if (cart[product] > 0) {
+                const cartItem = document.createElement("li");
+                cartItem.textContent = `${product} x${cart[product]}`;
+                cartList.appendChild(cartItem);
+            }
+        }
+    }
+
+    // Agrega un producto al carro
+    addButton.forEach((button) => {
+        button.addEventListener("click", (event) => {
+            const productName = event.target.getAttribute("data-product");
+            cart[productName] = (cart[productName] || 0) + 1;
+            updateCartList();
+            saveCartToLocalStorage();
+        });
+    });
+
+    // Quita un producto del carro
+    removeButton.forEach((button) => {
+        button.addEventListener("click", (event) => {
+            const productName = event.target.getAttribute("data-product");
+            if (cart[productName] > 0) {
+                cart[productName]--;
+                updateCartList();
+                saveCartToLocalStorage();
+            }
+        });
+    });
+
+    // Guarda el carro de compras en el almacenamiento local
+    function saveCartToLocalStorage() {
+        localStorage.setItem("cart", JSON.stringify(cart));
+    }
+
+    // Realiza el pedido y redirige a la página de revisión
+    checkoutButton.addEventListener("click", () => {
+        if (Object.keys(cart).some((product) => cart[product] > 0)) {
+            window.location.href = "pago.html";
+        } else {
+            alert("Agrega al menos un producto al carrito antes de continuar.");
+        }
+    });
+
+    // Inicializa la lista de compra
+    updateCartList();
+});

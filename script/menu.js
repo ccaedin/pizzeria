@@ -52,6 +52,20 @@ var menu = {
             description: "Refresco de cola",
             price: "4.95",
             id: "cocacola"
+        },
+        {
+            image: "./images/cocacola.jpg",
+            name: "Agua",
+            description: "Botella de agua",
+            price: "2.45",
+            id: "agua"
+        },
+        {
+            image: "./images/fanta.jpg",
+            name: "Fanta",
+            description: "Refresco de fanta",
+            price: "3.95",
+            id: "fanta"
         }
     ],
     offers: [

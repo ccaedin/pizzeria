@@ -8,3 +8,257 @@
     align-items: center;
 }
 
+.columna-pagina1{ /* Contenedor para los rectángulos */
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    align-content: center;
+    justify-items: start;
+    justify-content: center;
+    align-items: center;
+    margin-right: 20%;
+    margin: 1%;
+  }
+
+.product{
+    background-color: #d0d0d0;
+    margin: 5%;
+    padding: 4%;
+    width: 50%;
+    border: solid;
+    border-radius: 8%;
+}
+
+.breadcrumb {
+    background-color: #333;
+    color: white;
+    padding: 10px 0;
+}
+
+.breadcrumb ul {
+    list-style: none;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.breadcrumb a, .breadcrumb h1, .texto{
+    text-decoration: none;
+    color: #000;
+    font-weight: bold;
+    font-size: 0.9em;
+}
+
+.breadcrumb span {
+    color: #f18181;
+}
+
+.checkout{
+    width: 100%;
+    max-width: 200px;
+    font-size: 0.7em;
+    background-color: burlywood;
+}
+
+.add-button, .remove-button{
+    width: 32%;
+    font-size: 0.7em;
+}
+
+.cart-review{
+    background-color: #333;
+    margin: 5%;
+    padding: 4%;
+    width: 20%;
+    border: solid;
+    border-radius: 8%;
+}
+
+.cart ul {
+    display: block;
+    list-style-type: disc;
+    margin-block-start: 1em;
+    margin-block-end: 1em;
+    margin-inline-start: 0px;
+    margin-inline-end: 0px;
+    padding-inline-start: 20px;
+}
+
+.animated-element {
+    width: 80%;
+    height: 30%;
+    background-color: #3498db;
+    color: #fff;
+    text-align: center;
+    animation: miAnimacion 2s ease infinite;
+}
+
+@keyframes miAnimacion {
+    0% {
+        transform: scale(1);
+        background-color: #3498db;
+    }
+    50% {
+        transform: scale(1.2);
+        background-color: #e74c3c;
+    }
+    100% {
+        transform: scale(1);
+        background-color: #3498db;
+    }
+}
+
+/*movil o tablet*/
+@media (max-width: 800px) {
+    .caja-pequena { /* Seis rectángulos con imágenes centradas */
+        flex: 1;
+        background-color: #333;
+        height: 50%;
+        width: 90%;
+        border-radius: 5%;
+        padding: 2.5% 2.5% 2.5% 2.5%;
+        margin: 2.5%;
+        color: white;
+        text-align: -webkit-center;
+        /* align-items: center; */
+        position: relative;
+      }
+
+      .breadcrumb li {
+        margin: 0 10px;
+        color: #f18181;
+        font-size: 1.3em;
+    }
+
+    .p1{
+        margin-bottom: 1%;
+        font-size: 3em;
+        text-align:center;
+        font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif
+      }
+
+    .imagen_pequena {
+        max-width: 200px;
+        max-height: 200px;
+        border-radius: 15%;
+        width: 80%;
+        height: 80%;
+        border-radius: 15%;
+        margin-top: 10%;
+        border: solid;
+    }
+
+    .bloque_superior_derecha{
+        position: fixed;
+        top: 15%;
+        right: 2%;
+        background-color: #d0d0d0;
+        padding: 1%;
+        border: solid;
+        border-radius: 8%;
+        text-decoration: none;
+        color: white;
+        font-weight: bold;
+        font-size: 0.75em;
+    }
+
+    .texto2{
+        text-decoration: none;
+        color: white;
+        font-weight: bold;
+        font-size: 1.6em;
+        margin: 0;
+    }
+}
+
+/*solo movil*/
+@media (max-width: 600px) {
+    .imagen_pequena {
+      max-width: 120px;
+      max-height: 120px;
+      border-radius: 15%;
+      width: 80%;
+      height: 80%;
+      border-radius: 15%;
+      margin-top: 21%;
+      border: solid;
+    }
+
+    .p1{
+        margin-bottom: 1%;
+        font-size: 2em;
+        text-align:center;
+        font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif
+      }
+
+    .animated-element {
+        width: 80%;
+        height: 30%;
+        background-color: #3498db;
+        color: #fff;
+        text-align: center;
+        animation: miAnimacion 2s ease infinite;
+        padding-top: 1%;
+    }
+  }
+
+@media (min-width: 801px) {
+    .caja-pequena { /* Seis rectángulos con imágenes centradas */
+        flex: 1;
+        background-color: #333;
+        height: 70%;
+        width: 90%;
+        border-radius: 5%;
+        padding: 2.5% 2.5% 2.5% 2.5%;
+        margin: 2.5%;
+        color: white;
+        text-align: -webkit-center;
+        /* align-items: center; */
+        position: relative;
+      }
+
+      .breadcrumb li {
+        margin: 0 10px;
+        color: #f18181;
+        font-size: 1.3em;
+    }
+
+    .p1{
+        margin-bottom: 1%;
+        font-size: 4em;
+        text-align:center;
+        font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif
+      }
+
+    .imagen_pequena {
+    max-width: 300px;
+    max-height: 300px;
+    width: 150px;
+    height: 150px;
+    border-radius: 15%;
+    margin-top: 3%;
+    border: solid;
+    }
+
+    .bloque_superior_derecha{
+        position: fixed;
+        top: 12%;
+        right: 2%;
+        background-color: #d0d0d0;
+        padding: 1%;
+        border: solid;
+        border-radius: 8%;
+        width: 12%;
+        text-decoration: none;
+        color: white;
+        font-weight: bold;
+        font-size: 1em;
+    }
+
+    .texto2{
+        text-decoration: none;
+        color: white;
+        font-weight: bold;
+        font-size: 2em;
+        margin: 0;
+    }
+}
