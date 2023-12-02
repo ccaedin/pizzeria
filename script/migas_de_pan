@@ -1,5 +1,5 @@
 // Simula el progreso de la compra
-const pasosCompletados = 2; // Cambiar el número de pasos completados según el progreso
+const pasosCompletados = 3; // Cambiar el número de pasos completados según el progreso
 
 document.addEventListener("DOMContentLoaded", () => {
     const breadcrumbItems = document.querySelectorAll(".breadcrumb li a");

@@ -50,21 +50,21 @@ var menu = {
             image: "./images/cocacola.jpg",
             name: "Coca-Cola",
             description: "Refresco de cola",
-            price: "4.95",
+            price: "2.95",
             id: "cocacola"
         },
         {
-            image: "./images/cocacola.jpg",
+            image: "./images/agua.jpg",
             name: "Agua",
             description: "Botella de agua",
-            price: "2.45",
+            price: "1.45",
             id: "agua"
         },
         {
             image: "./images/fanta.jpg",
             name: "Fanta",
             description: "Refresco de fanta",
-            price: "3.95",
+            price: "2.45",
             id: "fanta"
         }
     ],
