@@ -2,15 +2,48 @@ document.addEventListener("DOMContentLoaded", function() {
     document.getElementById("addressForm").addEventListener("submit", handleAddress);
 });
 
-document.addEventListener("DOMContentLoaded", function() {
+// script.js
+
+document.addEventListener("DOMContentLoaded", function () {
     const rememberMeCheckbox = document.getElementById('rememberMe');
+    const userEmail = Cookies.get('userEmail');
+    const userPassword = Cookies.get('userPassword');
+
+    if (userEmail && userPassword) {
+        // El usuario está autenticado, cambia el contenido del contenedor de acciones de usuario
+        const userActionsContainer = document.querySelector('.user-actions');
+    
+        // Iniciar sesión (oculto)
+        const loginLink = document.getElementById('loginLink');
+        loginLink.style.display = 'none';
+    
+        // Cerrar sesión (visible)
+        const dropdown = userActionsContainer.querySelector('.dropdown');
+        const userEmailSpan = document.getElementById('userEmail');
+        userEmailSpan.innerText = userEmail;  // Actualiza el contenido con el correo electrónico
+        dropdown.style.display = 'inline';
+    
+        logoutLink.addEventListener('click', function () {
+            // Elimina las cookies al cerrar sesión
+            Cookies.remove('userEmail');
+            Cookies.remove('userPassword');
+            // Redirige o realiza otras acciones necesarias después de cerrar sesión
+            // window.location.href = '/pagina-de-inicio' por ejemplo
+        });
+    }
+
     rememberMeCheckbox.checked = Cookies.get('rememberMe') === 'true';
 
     rememberMeCheckbox.addEventListener('change', function () {
-        // Guardar el estado en la cookie
         Cookies.set('rememberMe', rememberMeCheckbox.checked, { expires: 7 });
     });
+
+    // Inicializa Bootstrap para el menú desplegable
+    new bootstrap.Dropdown(document.getElementById('userDropdown'));
+
+    // Resto del código general
 });
+
 
 let autocomplete
 function initMap() {
