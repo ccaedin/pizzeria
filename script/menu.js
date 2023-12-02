@@ -54,7 +54,7 @@ var menu = {
             id: "cocacola"
         },
         {
-            image: "./images/cocacola.jpg",
+            image: "./images/agua.jpg",
             name: "Agua",
             description: "Botella de agua",
             price: "2.45",
