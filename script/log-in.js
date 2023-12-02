@@ -1,51 +1,40 @@
 // login.js
 
-function saveCredentials(email, password) {
-    // Guardar credenciales en cookies
-    Cookies.set('rememberMe', 'true', { expires: 7 });
-    Cookies.set('userEmail', email, { expires: 7 });
-    Cookies.set('userPassword', password, { expires: 7 });
-}
-
-function clearCredentials() {
-    // Eliminar cookies de credenciales
-    Cookies.remove('rememberMe');
-    Cookies.remove('userEmail');
-    Cookies.remove('userPassword');
-}
-
 document.addEventListener("DOMContentLoaded", function () {
     const loginForm = document.getElementById('loginForm');
 
-    if (loginForm) {
-        loginForm.addEventListener('submit', function (event) {
-            event.preventDefault();
+    loginForm.addEventListener('submit', function (event) {
+        event.preventDefault();
 
-            const email = document.getElementById('e-mail').value;
-            const password = document.getElementById('password').value;
+        const email = document.getElementById('email').value;
+        const password = document.getElementById('password').value;
 
-            // Validar el formato del correo electrónico y la contraseña
-            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-            const passwordRegex = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}$/;
+        // Cargar cuentas existentes desde el localStorage
+        const existingAccounts = loadAccounts();
 
-            if (!emailRegex.test(email) || !passwordRegex.test(password)) {
-                alert('Formato de correo electrónico o contraseña incorrecto');
-                return;
-            }
+        // Buscar la cuenta correspondiente a las credenciales
+        const user = existingAccounts.find(account => account.email === email && account.password === password);
 
-            // Guardar credenciales en cookies si la casilla "Recuérdame" está marcada
-            const rememberMeCheckbox = document.getElementById('rememberMe');
-            if (rememberMeCheckbox.checked) {
-                saveCredentials(email, password);
-            } else {
-                clearCredentials();
-            }
+        if (user) {
+            // Iniciar sesión y crear cookies
+            setSessionCookies(user.email);
+            alert('Inicio de sesión exitoso');
+            // Redirigir a la página principal, por ejemplo
+            window.location.href = './index.html';
+        } else {
+            alert('Credenciales incorrectas');
+        }
+    });
 
-            // Redirigir a la página anterior (o a la página por defecto si no hay una página anterior)
-            const previousPage = document.referrer || './index.html';
-            window.location.href = previousPage;
-        });
+    // Función para cargar cuentas desde el localStorage
+    function loadAccounts() {
+        const existingAccounts = localStorage.getItem('accounts');
+        return existingAccounts ? JSON.parse(existingAccounts) : [];
     }
 
-    // Resto del código para manejar "Recuérdame" y otras funcionalidades
+    // Función para establecer cookies de sesión
+    function setSessionCookies(email) {
+        document.cookie = `userEmail=${email}; path=/`;
+        document.cookie = 'isLoggedIn=true; path=/';
+    }
 });

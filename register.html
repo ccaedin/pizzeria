@@ -11,7 +11,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link id="theme" rel="stylesheet" href="./css/copy.css">
     <script src="./script/script.js"></script>
-    <script src="./script/log-in.js"></script>
+    <script src="./script/register.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/js-cookie@3.0.1/dist/js.cookie.min.js"></script>
     <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyD96qjEPQJH3-HriscfLsjWKo2EgOPul5M&libraries=places&callback=initMap">
     </script>
@@ -66,8 +66,8 @@
         </nav>
         <div class="container d-flex flex-column justify-content-center align-items-center mt-5">
             <div class="card p-4 col-sm-12 col-lg-6">
-                <h5 class="card-title text-center mb-4">Iniciar sesión</h5>
-                <form id="loginForm">
+                <h5 class="card-title text-center mb-4">Registro de Cuenta</h5>
+                <form id="registerForm">
                     <div class="mb-3">
                         <label for="email" class="form-label">Correo electrónico:</label>
                         <input type="text" class="form-control" id="email" name="email" required>
@@ -76,20 +76,20 @@
                         <label for="password" class="form-label">Contraseña:</label>
                         <input type="password" class="form-control" id="password" name="password" required>
                     </div>
+                    <div class="mb-3">
+                        <label for="confirm_password" class="form-label">Confirmar contraseña:</label>
+                        <input type="password" class="form-control" id="confirm_password" name="confirm_password" required>
+                    </div>
                     <div class="mb-3 form-check">
                         <input type="checkbox" class="form-check-input" id="rememberMe">
                         <label class="form-check-label" for="rememberMe">Recuérdame</label>
                     </div>
-                    <div class="text-center mt-3">
-                        ¿No tienes cuenta? <a href="./register.html">Crea una ahora mismo</a>.
-                    </div>
                     <div class="text-center">
-                        <button type="submit" class="btn btn-danger">Iniciar sesión</button>
+                        <button type="submit" class="btn btn-danger">Registrarse</button>
                     </div>
                 </form>
             </div>
         </div>
-          
     </div>
     <!-- Footer -->
     

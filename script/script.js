@@ -2,14 +2,11 @@ document.addEventListener("DOMContentLoaded", function() {
     document.getElementById("addressForm").addEventListener("submit", handleAddress);
 });
 
-// script.js
-
 document.addEventListener("DOMContentLoaded", function () {
-    const rememberMeCheckbox = document.getElementById('rememberMe');
     const userEmail = Cookies.get('userEmail');
-    const userPassword = Cookies.get('userPassword');
+    const isLoggedIn = Cookies.get('isLoggedIn')
 
-    if (userEmail && userPassword) {
+    if (isLoggedIn) {
         // El usuario está autenticado, cambia el contenido del contenedor de acciones de usuario
         const userActionsContainer = document.querySelector('.user-actions');
     
@@ -26,24 +23,15 @@ document.addEventListener("DOMContentLoaded", function () {
         logoutLink.addEventListener('click', function () {
             // Elimina las cookies al cerrar sesión
             Cookies.remove('userEmail');
-            Cookies.remove('userPassword');
-            // Redirige o realiza otras acciones necesarias después de cerrar sesión
-            // window.location.href = '/pagina-de-inicio' por ejemplo
+            Cookies.remove('isLoggedIn');
         });
     }
-
-    rememberMeCheckbox.checked = Cookies.get('rememberMe') === 'true';
-
-    rememberMeCheckbox.addEventListener('change', function () {
-        Cookies.set('rememberMe', rememberMeCheckbox.checked, { expires: 7 });
-    });
 
     // Inicializa Bootstrap para el menú desplegable
     new bootstrap.Dropdown(document.getElementById('userDropdown'));
 
     // Resto del código general
 });
-
 
 let autocomplete
 function initMap() {
