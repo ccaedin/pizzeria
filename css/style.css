@@ -20,10 +20,12 @@
     background-color: #d0d0d0;
     margin: 5%;
     padding: 4%;
-    width: 50%;
+    width: -webkit-fill-available;
+    height: -webkit-fill-available;
     border: solid;
     color: #cccaca;
     border-radius: 8%;
+    text-align: center;
 }
 
 .breadcrumb {
@@ -45,6 +47,7 @@
     color: #000;
     font-weight: bold;
     font-size: 0.9em;
+    white-space: nowrap;
 }
 
 .breadcrumb span {
@@ -52,8 +55,7 @@
 }
 
 .checkout{
-    width: 100%;
-    max-width: 200px;
+    width: -webkit-fill-available;
     font-size: 0.7em;
     background-color: burlywood;
 }
@@ -114,6 +116,7 @@
         display: grid;
         grid-template-columns: 1fr 1fr 1fr;
         width: -webkit-fill-available;
+        height: -webkit-fill-available;
         align-content: center;
         justify-items: center;
         justify-content: center;
@@ -150,7 +153,7 @@
 
     .imagen_pequena {
         max-width: 200px;
-        max-height: 200px;
+        max-height: 150px;
         border-radius: 15%;
         width: 80%;
         height: 80%;
@@ -163,6 +166,7 @@
         background-color: #d0d0d0;
         padding: 4%;
         margin: 5%;
+        width: -webkit-fill-available;
         border: solid;
         border-radius: 8%;
         text-decoration: none;
@@ -216,7 +220,7 @@
         display: grid;
         grid-template-columns: 1fr 1fr 1fr;
         width: -webkit-fill-available;
-        width: 100%;
+        height: -webkit-fill-available;
         align-content: center;
         justify-items: center;
         justify-content: center;
@@ -265,6 +269,7 @@
         background-color: #d0d0d0;
         padding: 4%;
         margin: 5%;
+        width: -webkit-fill-available;
         border: solid;
         border-radius: 8%;
         text-decoration: none;
