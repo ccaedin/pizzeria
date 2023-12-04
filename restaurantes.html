@@ -10,108 +10,68 @@
         integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link id="theme" rel="stylesheet" href="./css/copy.css">
-    <script src="./script/restaurantes.js"></script>
+    <script src="./script/script.js"></script>
     <script async defer
         src="https://maps.googleapis.com/maps/api/js?key=AIzaSyD96qjEPQJH3-HriscfLsjWKo2EgOPul5M&libraries=places&callback=initMap">
         </script>
+    <script defer src="./script/restaurantes.js"></script>
 </head>
 
 <body class="d-flex flex-column">
     <div class="container-fluid">
-        <nav class="navbar  sticky-top navbar-expand-lg bg-body-tertiary">
-            <div class="container-fluid">
-                <a class="navbar-brand" href="#">Pizzería</a>
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
-                    data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
-                    aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-                <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                    <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                        <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
-                                aria-expanded="false">
-                                Who we are
-                            </a>
-                            <ul class="dropdown-menu">
-                                <li><a class="dropdown-item" href="#">Establecimientos</a></li>
-                                <li><a class="dropdown-item" href="#">Atención al Cliente</a></li>
-                                <li><a class="dropdown-item" href="#">Aceca de</a></li>
-                                <li>
-                                    <hr class="dropdown-divider">
-                                </li>
-                            </ul>
-                        </li>
-                    </ul>
-                    <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
-                        <li class="nav-item">
-                            <a class="nav-link active" aria-current="page" href="./index.html">Home</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" aria-current="page" href="./menu_page/promociones.html">Carta</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="./menu_page/promociones.html">Promociones</a>
-                        </li>
-                        <li id="nav-profile" class="nav-item">
-                            <a class="nav-link" href="#">Iniciar sesión</a>
-                        </li>
-                        <li class="nav-item">
-                            <button id="btn_cart" class="btn btn-danger" type="button">Carrito</button>
-                        </li>
-                    </ul>
+        <div id="nav-head"></div>
+            <div class="container d-flex flex-column justify-content-center align-content-center">
+                <div id="textContent" class="my-3">
+                    <h1 class="display-5 text-center">
+                        Nuestros Restaurantes
+                    </h1>
                 </div>
-            </div>
-        </nav>
-        <div class="container d-flex flex-column justify-content-center align-content-center">
-            <div id="textContent" class="my-3">
-                <h1 class="display-5 text-center">
-                    Nuestros Restaurantes
-                </h1>
-            </div>
 
-            <div class="container mt-3">
-                <!-- Título de la página -->
-                <h1>Restaurantes Disponibles</h1>
-            
-                <!-- Mapa de Google y Lista de restaurantes en la misma fila -->
-                <div class="row">
-                    <!-- Columna para el Mapa -->
-                    <div class="col-md-6">
-                        <div id="map" style="width:100%;height:600px;"></div>
-                    </div>
-            
-                    <!-- Columna para la Lista de restaurantes -->
-                    <div class="col-md-6">
-                        <ul class="list-group mt-3" id="restaurant-list">
-                            <!-- Datos ficticios de restaurantes -->
-                            <li class="list-group-item" data-id="1" data-lat="40.43298728841444" data-lng="-3.689733673350224">Restaurante 1 - Dirección 1</li>
-                            <li class="list-group-item" data-id="2" data-lat="41.380445634454375" data-lng="2.1862795923315996">Restaurante 2 - Dirección 2</li>
-                            <!-- Agrega más restaurantes según sea necesario -->
-                        </ul>
-                        <div id="restaurant-info" class="restaurant-info">
-                            <!-- Contenido de la información del restaurante -->
+                <div class="container mt-3">
+                    <!-- Título de la página -->
+                    <h1>Restaurantes Disponibles</h1>
+
+                    <!-- Mapa de Google y Lista de restaurantes en la misma fila -->
+                    <div class="row">
+                        <!-- Columna para el Mapa -->
+                        <div class="col-md-6">
+                            <div id="map" style="width:100%;height:600px;"></div>
+                        </div>
+
+                        <!-- Columna para la Lista de restaurantes -->
+                        <div class="col-md-6">
+                            <ul class="list-group mt-3" id="restaurant-list">
+                                <!-- Datos ficticios de restaurantes -->
+                                <li class="list-group-item" data-id="1" data-lat="40.43298728841444"
+                                    data-lng="-3.689733673350224">Restaurante 1 - Dirección 1</li>
+                                <li class="list-group-item" data-id="2" data-lat="41.380445634454375"
+                                    data-lng="2.1862795923315996">Restaurante 2 - Dirección 2</li>
+                                <!-- Agrega más restaurantes según sea necesario -->
+                            </ul>
+                            <div id="restaurant-info" class="restaurant-info">
+                                <!-- Contenido de la información del restaurante -->
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
-    <!-- Footer -->
+        <!-- Footer -->
 
-    <footer class="mt-auto pt-3 border-top">
-        <p class="text-center text-muted">© 2021 Pizzeria</p>
-        <ul class="nav justify-content-between border-bottom pb-3 px-5 bg-secondary">
-            <li class="nav-item"><a href="./" class="nav-link px-2 text-muted">Home</a></li>
-            <li class="nav-item"><a href="./carta.html" class="nav-link px-2 text-muted">Productos</a></li>
-            <li class="nav-item"><a href="./carta.html" class="nav-link px-2 text-muted">Nutricion y calidad</a></li>
-            <li class="nav-item"><a href="./privacy.html" class="nav-link px-2 text-muted">Aviso legal</a></li>
-            <li class="nav-item"><a href="./privacy.html" class="nav-link px-2 text-muted">Privacidad</a></li>
-        </ul>
-    </footer>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
-        integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
-        crossorigin="anonymous"></script>
+        <footer class="mt-auto pt-3 border-top">
+            <p class="text-center text-muted">© 2021 Pizzeria</p>
+            <ul class="nav justify-content-between border-bottom pb-3 px-5 bg-secondary">
+                <li class="nav-item"><a href="./" class="nav-link px-2 text-muted">Home</a></li>
+                <li class="nav-item"><a href="./carta.html" class="nav-link px-2 text-muted">Productos</a></li>
+                <li class="nav-item"><a href="./carta.html" class="nav-link px-2 text-muted">Nutricion y calidad</a>
+                </li>
+                <li class="nav-item"><a href="./privacy.html" class="nav-link px-2 text-muted">Aviso legal</a></li>
+                <li class="nav-item"><a href="./privacy.html" class="nav-link px-2 text-muted">Privacidad</a></li>
+            </ul>
+        </footer>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
+            integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
+            crossorigin="anonymous"></script>
 </body>
 
 </html>

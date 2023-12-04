@@ -1,0 +1,59 @@
+<nav class="navbar sticky-top navbar-expand-lg bg-body-tertiary">
+    <div class="container-fluid">
+        <a class="navbar-brand" href="/">Pizzería</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+            data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
+            aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
+                        aria-expanded="false">
+                        Who we are
+                    </a>
+                    <ul class="dropdown-menu">
+                        <li><a class="dropdown-item" href="restaurantes.html">Establecimientos</a></li>
+                        <li><a class="dropdown-item" href="form.html">Atención al Cliente</a></li>
+                        <li><a class="dropdown-item" href="aboutus.html">Acerca de</a></li>
+                        <li>
+                            <hr class="dropdown-divider">
+                        </li>
+                    </ul>
+                </li>
+            </ul>
+            <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+                <li class="nav-item">
+                    <a class="nav-link active" aria-current="page" href="./index.html">Home</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" aria-current="page" href="./menu_page/promociones.html">Carta</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="./menu_page/promociones.html">Promociones</a>
+                </li>
+                <li id="nav-profile" class="nav-item">
+                    <!-- Contenedor para acciones de usuario -->
+                    <div class="user-actions">
+                        <!-- Iniciar sesión (oculto) -->
+                        <a id="loginLink" class="nav-link" href="./log-in.html" style="display: inline;">Iniciar sesión</a>
+                        <!-- Cerrar sesión (oculto inicialmente) -->
+                        <div class="dropdown" style="display: none;">
+                            <button class="btn btn-secondary dropdown-toggle" type="button" id="userDropdown" data-bs-toggle="dropdown" aria-expanded="false">
+                                <span id="userEmail">Correo Electrónico</span>
+                            </button>
+                            <ul class="dropdown-menu" aria-labelledby="userDropdown">
+                                <li><a class="dropdown-item" href="./log-in.html" id="logoutLink">Cerrar sesión</a></li>
+                                <!-- Otros elementos del menú desplegable si es necesario -->
+                            </ul>
+                        </div>
+                    </div>
+                </li>
+                <li class="nav-item">
+                    <button id="btn_cart" class="btn btn-danger" type="button">Carrito</button>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
