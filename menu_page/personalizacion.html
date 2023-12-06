@@ -22,37 +22,48 @@
         <div class="breadcrumb">
             <ul>
                 <li><a href="promociones.html">Promociones</a></li>
-                <li>Pizza</li>
+                <li><a href="pizza.html">Pizza</a></li>
                 <li><a href="bebida.html">Bebida</a></li>
                 <li><a href="postre.html">Postre</a></li>
-                <li><a href="personalizacion.html">Personalizacion</a></li>
+                <li>Personalizacion</li>
             </ul>
         </div>
         <!-- Este es la contenido -->
         <div class = "content">
-            <div class="columna-pagina1">
+            <div class="columna-pagina2">
                 <div class="product">
-                    <img src="/images/carbonara.jpeg" alt="Café" class="imagen_pequena"> <br>
-                    <span class="texto">Carbonara - 8.95 €</span> <br>
-                    <button class="add-button" data-product="Carbonara">Añadir</button>
-                    <button class="remove-button" data-product="Carbonara">Quitar</button>
+                    <h2 class="texto">Personaliza tu Pizza</h2>
+                    <label for="pizza-size">Tamaño:</label>
+                    <select id="pizza-size">
+                        <option value="Pequeña">Pequeña</option>
+                        <option value="Mediana">Mediana</option>
+                        <option value="Grande">Grande</option>
+                    </select>
+                    <h2 class="texto">Queso</h2>
+                    <label for="pizza-toppings">Toppings:</label>
+                    <select id="pizza-toppings">
+                        <option value="Pepperoni">Pepperoni</option>
+                        <option value="Beacon">Beacon</option>
+                        <option value="Jamon">Jamon</option>
+                    </select>
+                    <h2 class="texto">Primer topping</h2>
+                    <label for="pizza-toppings">Toppings:</label>
+                    <select id="pizza-toppings">
+                        <option value="Pepperoni">Pepperoni</option>
+                        <option value="Beacon">Beacon</option>
+                        <option value="Jamon">Jamon</option>
+                    </select>
+                    <h2 class="texto">Segundo topping</h2>
+                    <label for="pizza-toppings2">Toppings:</label>
+                    <select id="pizza-toppings2">
+                        <option value="Pepperoni">Pepperoni</option>
+                        <option value="Beacon">Beacon</option>
+                        <option value="Brocoli">Brocoli</option>
+                    </select>
+                    <br> <br> 
+                    <button class="add-button-per">Agregar al carrito</button>
+                    <button class="remove-button-per">Quitar del carrito</button>
                 </div>
-                <div class="product">
-                  <img src="/images/hawaiian.jpeg" alt="Churro" class="imagen_pequena"> <br>
-                  <span class="texto">Hawaiian - 7.95 €</span> <br>
-                  <button class="add-button" data-product="Hawaiian">Añadir</button>
-                  <button class="remove-button" data-product="Hawaiian">Quitar</button>
-                </div>
-                <div class="product">
-                  <img src="/images/barbacoa.jpeg" alt="Trozo de Tarta" class="imagen_pequena"> <br>
-                  <span class="texto">Barbacoa - 9.95 €</span> <br>
-                  <button class="add-button" data-product="Barbacoa">Añadir</button>
-                  <button class="remove-button" data-product="Barbacoa">Quitar</button>
-                </div>
-                <div class="product">
-                    <img src="/images/barbacoa.jpeg" alt="Trozo de Tarta" class="imagen_pequena"> <br>
-                    <span class="texto"><a href="personalizacion.html">A tu gusto - 10.95 €</a></span><br>
-                  </div>
             </div>
             <div class="bloque_superior_derecha">
                 <div class="cart">
@@ -83,6 +94,7 @@
     <script src="/script/menu.js"></script>
     <script src="/script/migas_de_pan"></script>
     <script src="/script/carrito_compra"></script>
+    <script src="/script/modificar_pizza"></script>
 </body>
 
 </html>

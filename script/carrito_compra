@@ -1,6 +1,8 @@
 document.addEventListener("DOMContentLoaded", () => {
     const addButton = document.querySelectorAll(".add-button");
+    const addButtonPer = document.querySelectorAll(".add-button-per");
     const removeButton = document.querySelectorAll(".remove-button");
+    const removeButtonPer = document.querySelectorAll(".remove-button-per");
     const cartList = document.querySelector(".cart-list"); // Elemento de la lista de compra
     const checkoutButton = document.querySelector(".checkout");
 
@@ -19,6 +21,35 @@ document.addEventListener("DOMContentLoaded", () => {
         }
     }
 
+    // Agrega un producto al carro personalizado
+    addButtonPer.forEach((button) => {
+        button.addEventListener("click", (event) => {
+            const pizzaSize = document.getElementById("pizza-size").value;
+            const pizzaToppings = document.getElementById("pizza-toppings").value;
+            const pizzaToppings2 = document.getElementById("pizza-toppings2").value;
+            const productName = `Pizza Personalizada - ${pizzaSize} - ${pizzaToppings} - ${pizzaToppings2}`;
+            cart[productName] = (cart[productName] || 0) + 1;
+            updateCartList();
+            saveCartToLocalStorage();
+        });
+    });
+
+    // Agrega un producto al carro personalizado
+    removeButtonPer.forEach((button) => {
+        button.addEventListener("click", (event) => {
+            const pizzaSize = document.getElementById("pizza-size").value;
+            const pizzaToppings = document.getElementById("pizza-toppings").value;
+            const pizzaToppings2 = document.getElementById("pizza-toppings2").value;
+            const productName = `Pizza Personalizada - ${pizzaSize} - ${pizzaToppings} - ${pizzaToppings2}`;
+            if (cart[productName] > 0) {
+                cart[productName] = (cart[productName] || 0) - 1;
+                updateCartList();
+                saveCartToLocalStorage();
+            }
+        });
+    });
+    
+    
     // Agrega un producto al carro
     addButton.forEach((button) => {
         button.addEventListener("click", (event) => {
