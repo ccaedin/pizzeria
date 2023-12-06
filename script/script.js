@@ -6,8 +6,10 @@ fetch('/nav.html').then(function (response) {
     document.getElementById('nav-head').innerHTML = data;
     //set athe active class on the current page
     var url = window.location.pathname;
+    //get the filename from the url but files can be nested into folders
     var filename = url.substring(url.lastIndexOf('/') + 1);
-    var navItems = document.getElementsByClassName('nav-item');
+    
+    var navItems = document.getElementById("nav-body").getElementsByClassName('nav-item');
     for (var i = 0; i < navItems.length; i++) {
         var href = navItems[i].getElementsByTagName('a')[0].getAttribute('href');
         if (filename == href) {

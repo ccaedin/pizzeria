@@ -5,3 +5,8 @@ body {
 .card {
     font-size: 70%;
 }
+
+.social-icon {
+    /* turn off link styling */
+    text-decoration: none;
+}
