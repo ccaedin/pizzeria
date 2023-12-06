@@ -25,9 +25,10 @@ document.addEventListener("DOMContentLoaded", () => {
     addButtonPer.forEach((button) => {
         button.addEventListener("click", (event) => {
             const pizzaSize = document.getElementById("pizza-size").value;
+            const queso = document.getElementById("Queso").value;
             const pizzaToppings = document.getElementById("pizza-toppings").value;
             const pizzaToppings2 = document.getElementById("pizza-toppings2").value;
-            const productName = `Pizza Personalizada - ${pizzaSize} - ${pizzaToppings} - ${pizzaToppings2}`;
+            const productName = `Pizza Personalizada - ${pizzaSize} - ${queso} - ${pizzaToppings} - ${pizzaToppings2}`;
             cart[productName] = (cart[productName] || 0) + 1;
             updateCartList();
             saveCartToLocalStorage();
@@ -38,9 +39,10 @@ document.addEventListener("DOMContentLoaded", () => {
     removeButtonPer.forEach((button) => {
         button.addEventListener("click", (event) => {
             const pizzaSize = document.getElementById("pizza-size").value;
+            const queso = document.getElementById("Queso").value;
             const pizzaToppings = document.getElementById("pizza-toppings").value;
             const pizzaToppings2 = document.getElementById("pizza-toppings2").value;
-            const productName = `Pizza Personalizada - ${pizzaSize} - ${pizzaToppings} - ${pizzaToppings2}`;
+            const productName = `Pizza Personalizada - ${pizzaSize} - ${queso} - ${pizzaToppings} - ${pizzaToppings2}`;
             if (cart[productName] > 0) {
                 cart[productName] = (cart[productName] || 0) - 1;
                 updateCartList();
