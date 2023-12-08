@@ -1,5 +1,18 @@
 document.addEventListener("DOMContentLoaded", function() {
     document.getElementById("addressForm").addEventListener("submit", handleAddress);
+
+    //if the page contains ?error=address flash the introduce domicilio tab
+    const urlParams = new URLSearchParams(window.location.search);
+    const error = urlParams.get('error');
+    if(error == "address"){
+        //flash domicilio_adress tab through javascript
+        document.getElementById("domicilio_address").classList.add("flash");
+        //remove flash clash when domicilio_address tab is clicked
+        document.getElementById("domicilio_address").addEventListener("click", function(){
+            document.getElementById("domicilio_address").classList.remove("flash");
+        });
+
+    }
 });
 
 let autocomplete
@@ -49,8 +62,8 @@ function handleAddress(e) {
         //find which tab is active to determine a domicilio or a recogida
         type: document.getElementById("tab_container").getElementsByClassName("nav-link active")[0].id == "nav-domicilio-tab" ? "domicilio" : "recogida"
     }
-    window.sessionStorage.setItem("addressDetails", JSON.stringify(data));
+    window.localStorage.setItem("addressDetails", JSON.stringify(data));
     //redirect to menu page
-    window.location.href = "./carta.html";
+    window.location.href = "/menu_page/promociones.html";
     console.log(address);
 }

@@ -10,3 +10,21 @@ body {
     /* turn off link styling */
     text-decoration: none;
 }
+
+/* for the flash class set background color to red and slowly flash by rasing and lowering the opacity */
+.flash {
+    background-color: tomato;
+    animation: flash 1s infinite;
+}
+/* define the flash animation */
+@keyframes flash {
+    0% {
+        opacity: 1;
+    }
+    50% {
+        opacity: 0.5;
+    }
+    100% {
+        opacity: 1;
+    }
+}

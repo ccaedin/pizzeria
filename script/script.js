@@ -8,50 +8,62 @@ fetch('/nav.html').then(function (response) {
     var url = window.location.pathname;
     //get the filename from the url but files can be nested into folders
     var filename = url.substring(url.lastIndexOf('/') + 1);
-    
+
     var navItems = document.getElementById("nav-body").getElementsByClassName('nav-item');
     for (var i = 0; i < navItems.length; i++) {
-        var href = navItems[i].getElementsByTagName('a')[0].getAttribute('href');
-        if (filename == href) {
-            navItems[i].classList.add('active');
+        var tag = navItems[i].getElementsByTagName('a')[0];
+        if (tag != null && tag.hasAttribute('href')) {
+            var href = tag.getAttribute('href');
+            if (filename == href) {
+                navItems[i].classList.add('active');
+            }
         }
+    }
+    if (localStorage.getItem("cart") != null) {
+        var cart = JSON.parse(localStorage.getItem("cart"));
+        var cartCount = 0;
+        for (var product in cart) {
+            cartCount += cart[product];
+        }
+        document.getElementById('cart-count').innerHTML = cartCount;
+        const userEmail = Cookies.get('userEmail');
+        const isLoggedIn = Cookies.get('isLoggedIn')
+
+        if (isLoggedIn) {
+            // El usuario está autenticado, cambia el contenido del contenedor de acciones de usuario
+            const userActionsContainer = document.querySelector('.user-actions');
+
+            // Iniciar sesión (oculto)
+            const loginLink = document.getElementById('loginLink');
+            loginLink.style.display = 'none';
+
+            // Cerrar sesión (visible)
+            const dropdown = userActionsContainer.querySelector('.dropdown');
+            const userEmailSpan = document.getElementById('userEmail');
+            userEmailSpan.innerText = userEmail;  // Actualiza el contenido con el correo electrónico
+            dropdown.style.display = 'inline';
+
+            logoutLink.addEventListener('click', function () {
+                // Elimina las cookies al cerrar sesión
+                Cookies.remove('userEmail');
+                Cookies.remove('isLoggedIn');
+            });
+        }
+
+        // Inicializa Bootstrap para el menú desplegable
+        new bootstrap.Dropdown(document.getElementById('userDropdown'));
     }
 });
 fetch('/footer.html').then(function (response) {
     return response.text();
 }).then(function (data) {
-    var footer =document.getElementById('footer')
+    var footer = document.getElementById('footer')
     footer.innerHTML = data;
     footer.classList.add('mt-auto');
 });
 document.addEventListener("DOMContentLoaded", function () {
 
-    const userEmail = Cookies.get('userEmail');
-    const isLoggedIn = Cookies.get('isLoggedIn')
 
-    if (isLoggedIn) {
-        // El usuario está autenticado, cambia el contenido del contenedor de acciones de usuario
-        const userActionsContainer = document.querySelector('.user-actions');
-
-        // Iniciar sesión (oculto)
-        const loginLink = document.getElementById('loginLink');
-        loginLink.style.display = 'none';
-
-        // Cerrar sesión (visible)
-        const dropdown = userActionsContainer.querySelector('.dropdown');
-        const userEmailSpan = document.getElementById('userEmail');
-        userEmailSpan.innerText = userEmail;  // Actualiza el contenido con el correo electrónico
-        dropdown.style.display = 'inline';
-
-        logoutLink.addEventListener('click', function () {
-            // Elimina las cookies al cerrar sesión
-            Cookies.remove('userEmail');
-            Cookies.remove('isLoggedIn');
-        });
-    }
-
-    // Inicializa Bootstrap para el menú desplegable
-    new bootstrap.Dropdown(document.getElementById('userDropdown'));
 
     // Resto del código general
 });
