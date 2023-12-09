@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Confirmación de Pedido</title>
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link id="theme" rel="stylesheet" href="/css/copy.css">
+    <style>
+        #confirmation-timer {
+            font-size: 2em;
+            color: red;
+            animation: countdown-animation 1s infinite alternate;
+        }
+
+        @keyframes countdown-animation {
+            0% {
+                transform: scale(1);
+            }
+
+            100% {
+                transform: scale(1.2);
+            }
+        }
+    </style>
+    <script src="/script/script.js"></script>
+    <script src="/script/menu.js"></script>
+</head>
+
+<body>
+    <div class="container-fluid p-0">
+        <div id="nav-head"></div>
+        <div class="container">
+            <div id="order-confirmation">
+                <h2>Pedido Realizado con Éxito</h2>
+                <p>¡Gracias por tu pedido! Aquí tienes un resumen:</p>
+
+                <div class="card mt-2">
+                    <h3 class="card-header">Resumen del Pedido</h3>
+                    <div class="card-body">
+                        <!-- Aquí puedes mostrar los detalles del pedido -->
+                        <p class="card-text">Subtotal: <span id="confirmation-subtotal">0</span>€</p>
+                        <p class="card-text">Envío: <span id="confirmation-delivery">0</span>€</p>
+                        <p class="card-text">Total: <span id="confirmation-total">0</span>€</p>
+                    </div>
+                </div>
+
+                <p id="confirmation-message">Tu pedido estará listo en breve. Por favor, espera un momento.</p>
+                <p id="confirmation-countdown">Tiempo restante: <span id="confirmation-timer">10:00</span></p>
+            </div>
+            <!-- Footer -->
+        </div>
+
+        <div id="footer"></div>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
+            integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
+            crossorigin="anonymous"></script>
+
+        <script>
+            document.addEventListener("DOMContentLoaded", function () {
+                var confirmationTimerDisplay = document.getElementById("confirmation-timer");
+
+                // Set the timer for 10 minutes
+                var confirmationCountdownTime = 600; // seconds
+                var confirmationTimer = setInterval(function () {
+                    var confirmationMinutes = Math.floor(confirmationCountdownTime / 60);
+                    var confirmationSeconds = confirmationCountdownTime % 60;
+
+                    confirmationTimerDisplay.textContent = confirmationMinutes.toString().padStart(2, '0') + ":" + confirmationSeconds.toString().padStart(2, '0');
+
+                    if (confirmationCountdownTime <= 0) {
+                        // Timer reached zero, do something (e.g., redirect or display a message)
+                        clearInterval(confirmationTimer);
+                        document.getElementById("confirmation-message").textContent = "Tu pedido está listo. ¡Buen provecho!";
+                    }
+
+                    confirmationCountdownTime--;
+                }, 1000);
+            });
+        </script>
+    </body>
+
+</html>
