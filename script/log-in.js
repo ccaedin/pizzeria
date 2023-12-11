@@ -38,3 +38,6 @@ document.addEventListener("DOMContentLoaded", function () {
         document.cookie = 'isLoggedIn=true; path=/';
     }
 });
+
+
+

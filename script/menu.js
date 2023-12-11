@@ -308,40 +308,33 @@ document.addEventListener("DOMContentLoaded", function () {
     }
 
 
-    //if page is pagopago.html
-    if(window.location.pathname.includes("menu_page/pagopago.html")){
-        //get the address details from the local storage
-        var addressDetails = JSON.parse(localStorage.getItem("addressDetails"));
-        //if the address details is null
-        if(addressDetails == null){
-            //redirect to the index page
-            window.location.href = "/?error=address";
-        }
-        //if the address details is not null
-        else{
-            //get the address from the address details
-            var address = addressDetails.address;
-            //get the type from the address details
-            var type = addressDetails.type;
-            //get the address element
-            var addressElement = document.getElementById("direccion");
-            //get the type element
-            var typeElement = document.getElementById("codigo_postal");
-            //set the address element value to the address
-            //get the longest string of numbers and put it in the typeElement regex
-            //split the address by spaces, remove commas and select the element with the longest string that is all numbers
-            var longestString = address.split(" ").map((item) => item.replace(",", "")).reduce((prev, current) => prev.length > current.length ? prev : current);
+    // if page is pagopago.html
+    if (window.location.pathname.includes("menu_page/pagopago.html")) {
+        // Obtener datos del formulario de inicio de sesión si están disponibles
+        const userEmail = getCookie("userEmail");
 
-            addressElement.value = address;
-            //set the type element value to the type
-            typeElement.value = longestString;
+        if (userEmail) {
+            const fullName = getCookie(`${userEmail}_fullName`);
+            const postalCode = getCookie(`${userEmail}_postalCode`);
+            const address = getCookie(`${userEmail}_address`);
+
+            // Autocompletar los campos del formulario de pago con datos del usuario
+            document.getElementById("nombre").value = fullName || "";
+            document.getElementById("codigo_postal").value = postalCode || "";
+            document.getElementById("direccion").value = address || "";
+        } else {
+            // Si el usuario no ha iniciado sesión, redirigir a la página de inicio de sesión
+            window.location.href = "./login.html"; // Ajusta la ruta según tu estructura de archivos
         }
 
-        //fill the subtotal envio and total
+        // Resto del código existente...
+
+        // fill the subtotal envio and total
         document.getElementById("subtotal").innerHTML = sessionStorage.getItem("subtotal");
         document.getElementById("delivery").innerHTML = sessionStorage.getItem("delivery");
         document.getElementById("total").innerHTML = sessionStorage.getItem("total");
     }
+
 
     //if page is pagofinal
     if(window.location.pathname.includes("menu_page/pagofinal.html")){
@@ -351,3 +344,24 @@ document.addEventListener("DOMContentLoaded", function () {
         document.getElementById("confirmation-total").innerHTML = sessionStorage.getItem("total");
     }
 });
+
+// Función para obtener el valor de una cookie por su nombre
+function getCookie(cookieName) {
+    const name = cookieName + "=";
+    const decodedCookie = decodeURIComponent(document.cookie);
+    const cookieArray = decodedCookie.split(';');
+
+    for (let i = 0; i < cookieArray.length; i++) {
+        let cookie = cookieArray[i];
+        while (cookie.charAt(0) === ' ') {
+            cookie = cookie.substring(1);
+        }
+        if (cookie.indexOf(name) === 0) {
+            return cookie.substring(name.length, cookie.length);
+        }
+    }
+
+    return null;
+}
+
+
