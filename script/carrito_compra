@@ -1,4 +1,6 @@
 document.addEventListener("DOMContentLoaded", () => {
+
+    
     const addButton = document.querySelectorAll(".add-button");
     const addButtonPer = document.querySelectorAll(".add-button-per");
     const removeButton = document.querySelectorAll(".remove-button");
@@ -87,6 +89,33 @@ document.addEventListener("DOMContentLoaded", () => {
             alert("Agrega al menos un producto al carrito antes de continuar.");
         }
     });
+
+    if(window.location.pathname.includes("promociones.html")){
+        //get the urm parameter ?add=
+        var urlParams = new URLSearchParams(window.location.search);
+        var add = urlParams.get('add');
+        //change the url to remove the parameter
+        window.history.replaceState({}, document.title, "/" + "menu_page/promociones.html");
+        //if the parameter is not null
+        if(add != null){
+            //add the product to the cart
+            //update the cart list
+            if(add == "eltriple")
+            {
+                cart["El Triple"] = (cart["El Triple"] || 0) + 1;
+            }
+            else if(add == "eldoble")
+            {
+                cart["El Doble"] = (cart["El Doble"] || 0) + 1;
+            }
+            else if(add == "2refrescos")
+            {
+                cart["2 Refrescos"] = (cart["2 Refrescos"] || 0) + 1;
+            }
+            updateCartList();
+            saveCartToLocalStorage();
+        }
+    }
 
     // Inicializa la lista de compra
     updateCartList();

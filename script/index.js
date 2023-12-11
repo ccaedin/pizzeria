@@ -67,3 +67,14 @@ function handleAddress(e) {
     window.location.href = "/menu_page/promociones.html";
     console.log(address);
 }
+
+function addToCart(item) {
+    //if address is not set flash the introduce domicilio tab
+    if(window.localStorage.getItem("addressDetails") == null){
+        window.location.href = "/?error=address";
+    }
+    //redirect to promociones.html?add=item
+    window.location.href = "/menu_page/promociones.html?add="+item;
+    
+    
+}

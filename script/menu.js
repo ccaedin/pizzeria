@@ -127,16 +127,15 @@ document.addEventListener("DOMContentLoaded", function () {
         var items = document.getElementById("items");
         var subtotal = document.getElementById("subtotal");
         var delivery = document.getElementById("delivery");
-        if(localStorage.getItem("addressDetails") == null){
+        if (localStorage.getItem("addressDetails") == null) {
             window.location.href = "/?error=address";
         }
-        else
-        {
+        else {
             var addressDetails = JSON.parse(localStorage.getItem("addressDetails"));
-            if(addressDetails.type == "recogida"){
+            if (addressDetails.type == "recogida") {
                 delivery.innerHTML = "Recogida en tienda";
             }
-            else{
+            else {
                 delivery.innerHTML = "5.00";
             }
         }
@@ -153,28 +152,40 @@ document.addEventListener("DOMContentLoaded", function () {
         }
         //if the cart is not empty
         else {
-            
+
             var getMenuItem = (product) => { //get the menu item from the menu object that has same name as the product
-            var menuItem = menu.pizzas.find(item => item.title == product);
-            if(menuItem == undefined){
-                menuItem = menu.postres.find(item => item.title == product);
+                var menuItem = menu.pizzas.find(item => item.title == product);
+                if (menuItem == undefined) {
+                    menuItem = menu.postres.find(item => item.title == product);
+                }
+                if (menuItem == undefined) {
+                    menuItem = menu.drinks.find(item => item.title == product);
+                }
+                if (menuItem == undefined) {
+                    menuItem = menu.offers.find(item => item.title == product);
+                }
+                if (menuItem == undefined) {
+                    //if product contains Pizza Personalizada
+                    if (product.includes("Pizza Personalizada")) {
+                        menuItem = {
+                            title: product,
+                            description: "Pizza Personalizada",
+                            image: "/images/pizza-frabisa.jpg",
+                            price: "8.95",
+                        }
+
+                    }
+                    else {
+                        alert("Error: " + product + " not found in menu");
+                        return null;
+                    }
+                }
+                return menuItem;
             }
-            if(menuItem == undefined){
-                menuItem =  menu.drinks.find(item => item.title == product);
-            }
-            if(menuItem == undefined){
-               menuItem = menu.offers.find(item => item.title == product);
-            }
-            if(menuItem == undefined){
-                alert("Error: " + product + " not found in menu");
-                return null;
-            }
-            return menuItem;
-        }
             for (var product in cart) {
                 var menuItem = getMenuItem(product);
 
-                if(menuItem == null){
+                if (menuItem == null) {
                     continue;
                 }
                 /*
@@ -183,7 +194,7 @@ document.addEventListener("DOMContentLoaded", function () {
                 var card = document.createElement("div");
                 card.classList.add("card");
                 card.classList.add("mt-2");
-                
+
                 var row = document.createElement("div");
                 row.classList.add("row");
                 row.classList.add("d-flex");
@@ -200,7 +211,7 @@ document.addEventListener("DOMContentLoaded", function () {
                 img.classList.add("w-50");
 
                 img.src = menuItem.image;
-                img.alt = "Image of "+ menuItem.title
+                img.alt = "Image of " + menuItem.title
                 col4.appendChild(img);
                 var col8 = document.createElement("div");
                 col8.classList.add("col-8");
@@ -294,5 +305,49 @@ document.addEventListener("DOMContentLoaded", function () {
             sessionStorage.setItem("subtotal", subtotal.innerHTML);
             sessionStorage.setItem("delivery", delivery.innerHTML);
         }
+    }
+
+
+    //if page is pagopago.html
+    if(window.location.pathname.includes("menu_page/pagopago.html")){
+        //get the address details from the local storage
+        var addressDetails = JSON.parse(localStorage.getItem("addressDetails"));
+        //if the address details is null
+        if(addressDetails == null){
+            //redirect to the index page
+            window.location.href = "/?error=address";
+        }
+        //if the address details is not null
+        else{
+            //get the address from the address details
+            var address = addressDetails.address;
+            //get the type from the address details
+            var type = addressDetails.type;
+            //get the address element
+            var addressElement = document.getElementById("direccion");
+            //get the type element
+            var typeElement = document.getElementById("codigo_postal");
+            //set the address element value to the address
+            //get the longest string of numbers and put it in the typeElement regex
+            //split the address by spaces, remove commas and select the element with the longest string that is all numbers
+            var longestString = address.split(" ").map((item) => item.replace(",", "")).reduce((prev, current) => prev.length > current.length ? prev : current);
+
+            addressElement.value = address;
+            //set the type element value to the type
+            typeElement.value = longestString;
+        }
+
+        //fill the subtotal envio and total
+        document.getElementById("subtotal").innerHTML = sessionStorage.getItem("subtotal");
+        document.getElementById("delivery").innerHTML = sessionStorage.getItem("delivery");
+        document.getElementById("total").innerHTML = sessionStorage.getItem("total");
+    }
+
+    //if page is pagofinal
+    if(window.location.pathname.includes("menu_page/pagofinal.html")){
+        //get the total from the session storage
+        document.getElementById("confirmation-subtotal").innerHTML = sessionStorage.getItem("subtotal");
+        document.getElementById("confirmation-delivery").innerHTML = sessionStorage.getItem("delivery");
+        document.getElementById("confirmation-total").innerHTML = sessionStorage.getItem("total");
     }
 });
