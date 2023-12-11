@@ -7,6 +7,10 @@ document.addEventListener("DOMContentLoaded", function () {
         const email = document.getElementById('email').value;
         const password = document.getElementById('password').value;
         const confirmPassword = document.getElementById('confirm_password').value;
+        const fullName = document.getElementById('full_name').value;
+        const address = document.getElementById('address').value;
+        const postalCode = document.getElementById('postal_code').value;
+
 
         // Validar el formato del correo electrónico y la contraseña
         const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
@@ -27,8 +31,13 @@ document.addEventListener("DOMContentLoaded", function () {
             return;
         }
 
+        if (fullName.trim() === '' || address.trim() === '' || postalCode.trim() === '') {
+            alert('Por favor, completa todos los campos');
+            return;
+        }
+
         // Crear objeto de cuenta
-        const newAccount = { email, password };
+        const newAccount = { email, password, fullName, address, postalCode };
 
         // Cargar cuentas existentes desde el localStorage
         const existingAccounts = loadAccounts();
