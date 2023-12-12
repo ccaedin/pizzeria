@@ -17,7 +17,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
         if (user) {
             // Iniciar sesión y crear cookies
-            setSessionCookies(user.email);
+            setSessionCookies(user.email, user.fullName, user.address, user.postalCode);
             alert('Inicio de sesión exitoso');
             // Redirigir a la página principal, por ejemplo
             window.location.href = './index.html';
@@ -33,9 +33,12 @@ document.addEventListener("DOMContentLoaded", function () {
     }
 
     // Función para establecer cookies de sesión
-    function setSessionCookies(email) {
+    function setSessionCookies(email, fullName, address, postalCode) {
         document.cookie = `userEmail=${email}; path=/`;
         document.cookie = 'isLoggedIn=true; path=/';
+        document.cookie = `fullName=${fullName}; path=/`;
+        document.cookie = `address=${address}; path=/`;
+        document.cookie = `postalCode=${postalCode}; path=/`;
     }
 });
 

@@ -314,9 +314,9 @@ document.addEventListener("DOMContentLoaded", function () {
         const userEmail = getCookie("userEmail");
 
         if (userEmail) {
-            const fullName = getCookie(`${userEmail}_fullName`);
-            const postalCode = getCookie(`${userEmail}_postalCode`);
-            const address = getCookie(`${userEmail}_address`);
+            const fullName = getCookie('fullName');
+            const postalCode = getCookie('postalCode');
+            const address = getCookie('address');
 
             // Autocompletar los campos del formulario de pago con datos del usuario
             document.getElementById("nombre").value = fullName || "";
@@ -326,8 +326,6 @@ document.addEventListener("DOMContentLoaded", function () {
             // Si el usuario no ha iniciado sesión, redirigir a la página de inicio de sesión
             window.location.href = "./login.html"; // Ajusta la ruta según tu estructura de archivos
         }
-
-        // Resto del código existente...
 
         // fill the subtotal envio and total
         document.getElementById("subtotal").innerHTML = sessionStorage.getItem("subtotal");
@@ -346,22 +344,12 @@ document.addEventListener("DOMContentLoaded", function () {
 });
 
 // Función para obtener el valor de una cookie por su nombre
-function getCookie(cookieName) {
-    const name = cookieName + "=";
-    const decodedCookie = decodeURIComponent(document.cookie);
-    const cookieArray = decodedCookie.split(';');
-
-    for (let i = 0; i < cookieArray.length; i++) {
-        let cookie = cookieArray[i];
-        while (cookie.charAt(0) === ' ') {
-            cookie = cookie.substring(1);
-        }
-        if (cookie.indexOf(name) === 0) {
-            return cookie.substring(name.length, cookie.length);
-        }
-    }
-
-    return null;
+function getCookie(name) {
+    const value = `; ${document.cookie}`;
+    const parts = value.split(`; ${name}=`);
+    if (parts.length === 2) return parts.pop().split(';').shift();
 }
+
+
 
 
