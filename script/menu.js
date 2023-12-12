@@ -231,8 +231,13 @@ document.addEventListener("DOMContentLoaded", function () {
                 label.innerHTML = "Quantity: ";
                 var br = document.createElement("br");
                 var input = document.createElement("input");
+                label.id = menuItem.id + "-quantity";
                 input.type = "number";
+                input.id = menuItem.id + "-input";
                 input.value = cart[product];
+                //for aria label
+                input.setAttribute("aria-label", "Quantity of " + menuItem.title);
+                label.setAttribute("for", menuItem.id + "-input");
                 //add to the subtotal and round to 2 decimal
                 subtotal.innerHTML = Number(subtotal.innerHTML) + Number(menuItem.price) * Number(cart[product]);
                 subtotal.innerHTML = Math.round(subtotal.innerHTML * 100) / 100;
@@ -324,7 +329,7 @@ document.addEventListener("DOMContentLoaded", function () {
             document.getElementById("direccion").value = address || "";
         } else {
             // Si el usuario no ha iniciado sesión, redirigir a la página de inicio de sesión
-            window.location.href = "./login.html"; // Ajusta la ruta según tu estructura de archivos
+            window.location.href = "/log-in.html"; // Ajusta la ruta según tu estructura de archivos
         }
 
         // Resto del código existente...
