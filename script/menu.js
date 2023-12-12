@@ -231,13 +231,10 @@ document.addEventListener("DOMContentLoaded", function () {
                 label.innerHTML = "Quantity: ";
                 var br = document.createElement("br");
                 var input = document.createElement("input");
-                label.id = menuItem.id + "-quantity";
+                input.id = menuItem.id + "-quantity";
                 input.type = "number";
-                input.id = menuItem.id + "-input";
                 input.value = cart[product];
-                //for aria label
-                input.setAttribute("aria-label", "Quantity of " + menuItem.title);
-                label.setAttribute("for", menuItem.id + "-input");
+                label.setAttribute("for", input.id);
                 //add to the subtotal and round to 2 decimal
                 subtotal.innerHTML = Number(subtotal.innerHTML) + Number(menuItem.price) * Number(cart[product]);
                 subtotal.innerHTML = Math.round(subtotal.innerHTML * 100) / 100;
@@ -246,50 +243,7 @@ document.addEventListener("DOMContentLoaded", function () {
                 input.min = "1";
                 input.max = "10";
                 input.disabled = true;
-                // var i = document.createElement("i");
-                // i.classList.add("fa");
-                // i.classList.add("fa-edit");
-                // //put the i inside a a
-                // var a = document.createElement("a");
-                // a.href = "#";
-                // a.appendChild(i);
-                // a.addEventListener("click", function(){
-                //     //enabled the input
-                //     console.log(input);
-                //     input.removeAttribute("disabled");
-                //     console.log("fdfs");
-                //     //when the input is changed
-                //     input.addEventListener("change", function(){
-                //         //if the value is less than 1
-                //         if(input.value < 1){
-                //             //set the value to 1
-                //             input.value = 1;
-                //         }
-                //         //if the value is greater than 10
-                //         else if(input.value > 10){
-                //             //set the value to 10
-                //             input.value = 10;
-                //         }
-                //         //if the value is between 1 and 10
-                //         else{
-                //             //update the cart
-                //             cart[product] = input.value;
-                //             //update the local storage
-                //             localStorage.setItem("cart", JSON.stringify(cart));
-                //             //update the subtotal
-                //             subtotal.innerHTML = Number(subtotal.innerHTML) - Number(menuItem.price) * Number(cart[product]);
-                //             subtotal.innerHTML = Number(subtotal.innerHTML) + Number(menuItem.price) * Number(input.value);
-                //             subtotal.innerHTML = Math.round(subtotal.innerHTML * 100) / 100;
-                //             //update the number of items
-                //             numberItems.innerHTML = Number(numberItems.innerHTML) - Number(cart[product]);
-                //             numberItems.innerHTML = Number(numberItems.innerHTML) + Number(input.value);
-                //             //update the cart list
-                //             updateCartList();
-                //         }
-                //     }, {once: true});
-
-
-                // });
+                
                 cardText.appendChild(label);
                 cardText.appendChild(br);
                 cardText.appendChild(input);
@@ -309,6 +263,7 @@ document.addEventListener("DOMContentLoaded", function () {
             sessionStorage.setItem("total", document.getElementById("total").innerHTML);
             sessionStorage.setItem("subtotal", subtotal.innerHTML);
             sessionStorage.setItem("delivery", delivery.innerHTML);
+            sessionStorage.setItem("numberItems", numberItems.innerHTML);
         }
     }
 
@@ -319,9 +274,9 @@ document.addEventListener("DOMContentLoaded", function () {
         const userEmail = getCookie("userEmail");
 
         if (userEmail) {
-            const fullName = getCookie(`${userEmail}_fullName`);
-            const postalCode = getCookie(`${userEmail}_postalCode`);
-            const address = getCookie(`${userEmail}_address`);
+            const fullName = getCookie('fullName');
+            const postalCode = getCookie('postalCode');
+            const address = getCookie('address');
 
             // Autocompletar los campos del formulario de pago con datos del usuario
             document.getElementById("nombre").value = fullName || "";
@@ -329,21 +284,21 @@ document.addEventListener("DOMContentLoaded", function () {
             document.getElementById("direccion").value = address || "";
         } else {
             // Si el usuario no ha iniciado sesión, redirigir a la página de inicio de sesión
-            window.location.href = "/log-in.html"; // Ajusta la ruta según tu estructura de archivos
+            window.location.href = "./login.html"; // Ajusta la ruta según tu estructura de archivos
         }
-
-        // Resto del código existente...
 
         // fill the subtotal envio and total
         document.getElementById("subtotal").innerHTML = sessionStorage.getItem("subtotal");
         document.getElementById("delivery").innerHTML = sessionStorage.getItem("delivery");
         document.getElementById("total").innerHTML = sessionStorage.getItem("total");
+        document.getElementById("number-items").innerHTML = sessionStorage.getItem("numberItems");
     }
 
 
     //if page is pagofinal
     if(window.location.pathname.includes("menu_page/pagofinal.html")){
         //get the total from the session storage
+        document.getElementById("number-items").innerHTML = sessionStorage.getItem("numberItems");
         document.getElementById("confirmation-subtotal").innerHTML = sessionStorage.getItem("subtotal");
         document.getElementById("confirmation-delivery").innerHTML = sessionStorage.getItem("delivery");
         document.getElementById("confirmation-total").innerHTML = sessionStorage.getItem("total");
@@ -351,22 +306,11 @@ document.addEventListener("DOMContentLoaded", function () {
 });
 
 // Función para obtener el valor de una cookie por su nombre
-function getCookie(cookieName) {
-    const name = cookieName + "=";
-    const decodedCookie = decodeURIComponent(document.cookie);
-    const cookieArray = decodedCookie.split(';');
-
-    for (let i = 0; i < cookieArray.length; i++) {
-        let cookie = cookieArray[i];
-        while (cookie.charAt(0) === ' ') {
-            cookie = cookie.substring(1);
-        }
-        if (cookie.indexOf(name) === 0) {
-            return cookie.substring(name.length, cookie.length);
-        }
-    }
-
-    return null;
+function getCookie(name) {
+    const value = `; ${document.cookie}`;
+    const parts = value.split(`; ${name}=`);
+    if (parts.length === 2) return parts.pop().split(';').shift();
 }
+
 
 
