@@ -28,35 +28,41 @@
                 </div>
 
                 <div class="container mt-3">
-                    <!-- Título de la página -->
                     <h1>Restaurantes Disponibles</h1>
 
-                    <!-- Mapa de Google y Lista de restaurantes en la misma fila -->
                     <div class="row">
                         <!-- Columna para el Mapa -->
                         <div class="col-md-6">
                             <div id="map" style="width:100%;height:600px;"></div>
                         </div>
 
-                        <!-- Columna para la Lista de restaurantes -->
                         <div class="col-md-6">
-                            <ul class="list-group mt-3" id="restaurant-list">
-                                <!-- Datos ficticios de restaurantes -->
-                                <li class="list-group-item" data-id="1" data-lat="40.43298728841444"
-                                    data-lng="-3.689733673350224">Restaurante 1 - Dirección 1</li>
-                                <li class="list-group-item" data-id="2" data-lat="41.380445634454375"
-                                    data-lng="2.1862795923315996">Restaurante 2 - Dirección 2</li>
-                                <!-- Agrega más restaurantes según sea necesario -->
-                            </ul>
-                            <div id="restaurant-info" class="restaurant-info">
-                                <!-- Contenido de la información del restaurante -->
+                            <div id="restaurant-list" class="mb-3">
+                                <div class="restaurante-item" data-id="1">
+                                    <h4>Restaurante 1</h4>
+                                    <div class="restaurante-info">
+                                        <p>Dirección: Paseo de Madrid 115</p>
+                                        <p>Teléfono: 123-456-789</p>
+                                        <p>Descripción: Un lugar acogedor con deliciosas pizzas y pasta italiana.</p>
+                                    </div>
+                                    <button class="btn btn-primary btn-recoger btn-danger" style="display:none">Recoger aquí</button>
+                                </div>
+                                
+                                <div class="restaurante-item" data-id="2">
+                                    <h4>Restaurante 2</h4>
+                                    <div class="restaurante-info">
+                                        <p>Dirección: Paseo de Barcelona, 12</p>
+                                        <p>Teléfono: 987-654-321</p>
+                                        <p>Descripción: Un restaurante con vistas al mar, especializado en cocina mediterránea.</p>
+                                    </div>
+                                    <button class="btn btn-primary btn-recoger btn-danger" style="display:none">Recoger aquí</button>
+                                </div>                                
                             </div>
-                        </div>
+                        </div>                        
                     </div>
                 </div>
             </div>
         </div>
-        <!-- Footer -->
 
         <footer class="mt-auto pt-3 border-top">
             <p class="text-center text-muted">© 2021 Pizzeria</p>
