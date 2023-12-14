@@ -33,6 +33,7 @@ html {
     transition: background-color 0.3s ease;
     cursor: pointer;
     border-radius: 10px; /* Esquinas redondas */
+    padding: 10px; 
 }
 
 .restaurante-item:hover {
@@ -47,3 +48,4 @@ html {
 .btn-recoger {
     border-radius: 10px; /* Esquinas redondas */
 }
+
