@@ -16,11 +16,13 @@ fetch('/nav.html').then(function (response) {
         var tag = navItems[i].getElementsByTagName('a')[0];
         if (tag != null && tag.hasAttribute('href')) {
             var href = tag.getAttribute('href');
-            if (filename == href) {
+            //if url contains the href
+            if (filename.includes(href)) {
                 navItems[i].classList.add('active');
             }
         }
     }
+    //if contains menu_page than set Carta to active
     var s = document.createElement("script");
     s.type = "text/javascript";
     s.src = "https://cdn.jsdelivr.net/npm/js-cookie@3.0.1/dist/js.cookie.min.js"
@@ -29,7 +31,7 @@ fetch('/nav.html').then(function (response) {
             var cart = JSON.parse(localStorage.getItem("cart"));
             var cartCount = 0;
             for (var product in cart) {
-                cartCount += cart[product];
+                cartCount += Number(cart[product]);
             }
             document.getElementById('cart-count').innerHTML = cartCount;
             const userEmail = Cookies.get('userEmail');

@@ -259,7 +259,11 @@ document.addEventListener("DOMContentLoaded", function () {
 
 
             }
-            document.getElementById("total").innerHTML = Number(subtotal.innerHTML) + Number(delivery.innerHTML);
+            document.getElementById("total").innerHTML = Number(subtotal.innerHTML);
+            //if the delivery is not recogida
+            if (delivery.innerHTML != "Recogida en tienda") {
+                document.getElementById("total").innerHTML = Number(subtotal.innerHTML) + Number(delivery.innerHTML);
+            }
             sessionStorage.setItem("total", document.getElementById("total").innerHTML);
             sessionStorage.setItem("subtotal", subtotal.innerHTML);
             sessionStorage.setItem("delivery", delivery.innerHTML);
@@ -271,6 +275,22 @@ document.addEventListener("DOMContentLoaded", function () {
     // if page is pagopago.html
     if (window.location.pathname.includes("menu_page/pagopago.html")) {
         // Obtener datos del formulario de inicio de sesión si están disponibles
+        //disable card fields unless con tarjeta is checked
+        document.getElementById("numero_tarjeta").disabled = true;
+        document.getElementById("date").disabled = true;
+        document.getElementById("ccv").disabled = true;
+        document.getElementById("en_efectivo").checked = true;
+        document.getElementById("con_tarjeta").addEventListener("click", function () {
+            document.getElementById("numero_tarjeta").disabled = false;
+            document.getElementById("date").disabled = false;
+            document.getElementById("ccv").disabled = false;
+        });
+        document.getElementById("en_efectivo").addEventListener("click", function () {
+            document.getElementById("numero_tarjeta").disabled = true;
+            document.getElementById("date").disabled = true;
+            document.getElementById("ccv").disabled = true;
+        });
+        
         const userEmail = getCookie("userEmail");
 
         if (userEmail) {
@@ -282,9 +302,32 @@ document.addEventListener("DOMContentLoaded", function () {
             document.getElementById("nombre").value = fullName || "";
             document.getElementById("codigo_postal").value = postalCode || "";
             document.getElementById("direccion").value = address || "";
+            //if addressDetails is not null, fill the address field with the address
+            if (localStorage.getItem("addressDetails") != null) {
+                var addressDetails = JSON.parse(localStorage.getItem("addressDetails"));
+                if(addressDetails.type == "recogida"){
+                    //change address-header to Recogida
+                    document.getElementById("address-header").innerHTML = "Recogida";
+                    //get and remove the code postal field and its label
+
+                }
+                    //changed 
+                document.getElementById("direccion").value = addressDetails.address;
+                //set the code postal field to the code postal from the address
+                //get the code postal from the address, the longest string of numbers
+                var codePostal = addressDetails.address.match(/\d+/g).reduce(function (a, b) { return a.length > b.length ? a : b; });
+                document.getElementById("codigo_postal").value = codePostal;
+            }
+            //if there is card data
+            if (getCookie("cardNumber")) {
+                // Autocompletar los campos del formulario de pago con datos de la tarjeta
+                document.getElementById("numero_tarjeta").value = getCookie("cardNumber");
+                document.getElementById("date").value = getCookie("cardDate");
+                document.getElementById("ccv").value = getCookie("cardCCV");
+            }
         } else {
             // Si el usuario no ha iniciado sesión, redirigir a la página de inicio de sesión
-            window.location.href = "./login.html"; // Ajusta la ruta según tu estructura de archivos
+            window.location.href = "/log-in.html"; // Ajusta la ruta según tu estructura de archivos
         }
 
         // fill the subtotal envio and total
@@ -298,7 +341,7 @@ document.addEventListener("DOMContentLoaded", function () {
     //if page is pagofinal
     if(window.location.pathname.includes("menu_page/pagofinal.html")){
         //get the total from the session storage
-        document.getElementById("number-items").innerHTML = sessionStorage.getItem("numberItems");
+        // document.getElementById("number-items").innerHTML = sessionStorage.getItem("numberItems");
         document.getElementById("confirmation-subtotal").innerHTML = sessionStorage.getItem("subtotal");
         document.getElementById("confirmation-delivery").innerHTML = sessionStorage.getItem("delivery");
         document.getElementById("confirmation-total").innerHTML = sessionStorage.getItem("total");
@@ -310,6 +353,45 @@ function getCookie(name) {
     const value = `; ${document.cookie}`;
     const parts = value.split(`; ${name}=`);
     if (parts.length === 2) return parts.pop().split(';').shift();
+}
+
+function finalizeOrder()
+{
+    //if all the fields are filled redirect to /menu_page/pagofinal.html
+    var nombre = document.getElementById("nombre").value;
+    var codigo_postal = document.getElementById("codigo_postal").value;
+    var direccion = document.getElementById("direccion").value;
+    if(nombre == "" || codigo_postal == "" || direccion == "")
+    {
+        alert("Por favor rellene todos los campos");
+        return;
+    }
+    //if en efectivo is checked nothing more but if con tarjeta is checked check if the fields are filled
+    var efectivo = document.getElementById("en_efectivo").checked;
+    var tarjeta = document.getElementById("con_tarjeta").checked;
+    //if neither efectivo or tarjeta is checked alert the user
+    if(!efectivo && !tarjeta)
+    {
+        alert("Por favor seleccione un método de pago");
+        return;
+    }
+    if(tarjeta)
+    {
+        var numero_tarjeta = document.getElementById("numero_tarjeta").value;
+        var fecha_caducidad = document.getElementById("date").value;
+        var cvv = document.getElementById("ccv").value;
+        if(numero_tarjeta == "" || fecha_caducidad == "" || cvv == "")
+        {
+            alert("Por favor rellene las detalles de tarjeta");
+            return;
+        }
+        document.cookie = `cardNumber=${numero_tarjeta}; path=/`;
+        document.cookie = `cardDate=${fecha_caducidad}; path=/`;
+        document.cookie = `cardCCV=${cvv}; path=/`;
+
+
+    }
+    document.location = "/menu_page/pagofinal.html";
 }
 
 

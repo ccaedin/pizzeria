@@ -51,7 +51,7 @@
                                 </div>
                                 <div class="col-6">
                                     <div class="card-body pb-2">
-                                        <h5 class="card-title">Domicilio</h5>
+                                        <h5 class="card-title" id="address-header">Domicilio</h5>
                                         <p class="card-text">
                                             <label for="direccion">Dirección:</label>
                                             <input type="text" id="direccion" name="direccion" class="form-control">
@@ -80,7 +80,7 @@
                                 <p class="card-text">Subtotal: <span id="subtotal">0</span>€</p>
                                 <p class="card-text">Envío: <span id="delivery">0</span>€</p>
                                 <p class="card-text">Total: <span id="total">0</span>€</p>
-                                <a href="/menu_page/pagofinal.html" class="btn btn-danger">Finalizar pedido</a>
+                                <a href="#" onclick="finalizeOrder()" class="btn btn-danger">Finalizar pedido</a>
                             </div>
                         </div>
 

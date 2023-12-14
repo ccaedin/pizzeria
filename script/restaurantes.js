@@ -65,6 +65,12 @@ function mostrarBoton(restauranteId) {
         boton.style.display = 'inline-block';
         boton.addEventListener('click', function () {
             // Redirige a index.html
+            //set the addressDetails to that of the restaurant
+            var data = {
+                address: "Restaurante " + restauranteId,
+                type: "recogida"
+            }
+            window.localStorage.setItem("addressDetails", JSON.stringify(data));
             window.location.href = 'index.html';
         });
     }

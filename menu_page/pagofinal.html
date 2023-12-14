@@ -62,6 +62,9 @@
 
         <script>
             document.addEventListener("DOMContentLoaded", function () {
+                //clear the cart
+                localStorage.removeItem("cart");
+
                 var confirmationTimerDisplay = document.getElementById("confirmation-timer");
 
                 // Set the timer for 10 minutes

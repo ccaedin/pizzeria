@@ -44,6 +44,14 @@ function showPosition(position) {
             if (status == google.maps.GeocoderStatus.OK) {
                 if (results[0]) {
                     document.getElementById("domicilio_address").value = results[0].formatted_address;
+                    //if it is the recojida tab then display restaurante 1 or 2 if the address is in madrid or barcelona
+                    if(document.getElementById("tab_container").getElementsByClassName("nav-link active")[0].id == "nav-recoger-tab"){
+                        if(results[0].formatted_address.includes("Madrid")){
+                            document.getElementById("domicilio_address").value = "Restaurante 1";
+                        }else if(results[0].formatted_address.includes("Barcelona")){
+                            document.getElementById("domicilio_address").value = "Restaurante 2";
+                        }
+                    }
                 }
             }
         }
