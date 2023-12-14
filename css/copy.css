@@ -49,3 +49,8 @@ html {
     border-radius: 10px; /* Esquinas redondas */
 }
 
+/* usuario quiere que el menu era mas grande */
+nav {
+    font-size: large;
+}
+
