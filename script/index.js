@@ -45,7 +45,7 @@ function showPosition(position) {
                 if (results[0]) {
                     document.getElementById("domicilio_address").value = results[0].formatted_address;
                     //if it is the recojida tab then display restaurante 1 or 2 if the address is in madrid or barcelona
-                    if(document.getElementById("tab_container").getElementsByClassName("nav-link active")[0].id == "nav-recoger-tab"){
+                    if(document.getElementById("tab_container").getElementsByClassName("nav-link active")[0].id == "nav-recogida-tab"){
                         if(results[0].formatted_address.includes("Madrid")){
                             document.getElementById("domicilio_address").value = "Restaurante 1";
                         }else if(results[0].formatted_address.includes("Barcelona")){
@@ -56,6 +56,13 @@ function showPosition(position) {
             }
         }
     );
+    var address = document.getElementById("domicilio_address").value;
+    var data = {
+        address: address,
+        //find which tab is active to determine a domicilio or a recogida
+        type: document.getElementById("tab_container").getElementsByClassName("nav-link active")[0].id == "nav-domicilio-tab" ? "domicilio" : "recogida"
+    }
+    window.localStorage.setItem("addressDetails", JSON.stringify(data));
 }
 /**
  * 
