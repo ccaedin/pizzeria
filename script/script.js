@@ -74,9 +74,3 @@ fetch('/footer.html').then(function (response) {
     footer.innerHTML = data;
     footer.classList.add('mt-auto');
 });
-document.addEventListener("DOMContentLoaded", function () {
-
-
-
-    // Resto del código general
-});
