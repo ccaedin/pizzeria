@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 <!DOCTYPE html>
 <html lang="en">
 
@@ -122,4 +123,130 @@
         crossorigin="anonymous"></script>
 </body>
 
+=======
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pizzeria</title>
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link id="theme" rel="stylesheet" href="./css/copy.css">
+    <script src="./script/script.js"></script>
+    <script src="./script/index.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/js-cookie@3.0.1/dist/js.cookie.min.js"></script>
+    <script async defer
+        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyD96qjEPQJH3-HriscfLsjWKo2EgOPul5M&libraries=places&callback=initMap">
+        </script>
+</head>
+
+<body class="d-flex flex-column">
+    <div class="container-fluid">
+        <nav id="nav-head"></nav>
+        <div class="container d-flex flex-column justify-content-center align-content-center">
+            <div id="textContent" class="my-3">
+                <h1 class="display-5 text-center">
+                    Jueves de locure: Todas las pizzas 50% en domicilio
+                </h1>
+            </div>
+            <div id="tab_container" class="row justify-content-center">
+                <!-- two tabs  -->
+                <div class="col-8 border border-black rounded-top p-0">
+                    <nav class="nav nav-tabs nav-justified">
+                        <a class="nav-link active" id="nav-domicilio-tab" data-bs-toggle="tab" href="#nav-domicilio"
+                            role="tab" aria-controls="nav-domicilio" aria-selected="true">Domicilio</a>
+                        <a class="nav-link" id="nav-recoger-tab" data-bs-toggle="tab" href="#nav-domicilio" role="tab"
+                            aria-controls="nav-domicilio" aria-selected="false">Recoger</a>
+                    </nav>
+                    <div class="tab-content" id="tabs_content">
+                        <div class="tab-pane fade show active" id="nav-domicilio" role="tabpanel"
+                            aria-labelledby="nav-domicilio-tab nav-recoger-tab">
+                            <form id="addressForm" class="px-5 py-3">
+                                <div class="my-3">
+                                    <input class="form-control mb-2" id="domicilio_address" type="text"
+                                        placeholder="Introduce tu direccion" aria-label="Direccion">
+                                    <div class="d-grid px-3">
+                                        <button class="btn btn-outline-primary" type="button" onclick="getLocation()"><i
+                                                class="fa fa-location-arrow" aria-hidden="true"></i> Usar ubicación
+                                            actual</button>
+                                    </div>
+                                </div>
+                                <div class="d-grid my-4 mx-5">
+                                    <button id="btn_domicilio_search" class="btn btn-danger"
+                                        type="submit">Buscar</button>
+                                </div>
+                                <p class=".fs-6 fw-semibold">
+                                    Estás registrado? <a class="link-danger" href="/log-in.html">Inicia sesión</a> para pedir más
+                                    rápido
+                                </p>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+            <div class="">
+                <h1>Descrube nuestras ofertas</h1>
+                <div id="ofertas" class="row justify-content-lg-center row-gap-2">
+                    <div class="col-lg-3 col-sm-6 d-flex align-items-stretch">
+                        <div class="oferta card">
+                            <img class="card-img-top" src="./images/barbacoa.jpeg" alt="barbacoa">
+                            <div class="card-body pb-2">
+                                <h5 class="card-title">El Triple</h5>
+                                <p class="card-text mb-0">
+                                    Elige 3 medianas (hasta 5 igredientes) desde 8,95€ c/u
+                                </p>
+                                <a href="#" class="card-link">Ver Más</a>
+                            </div>
+                            <button href="#" class="btn btn-danger p-1 mx-2 mb-2"
+                                onclick="addToCart('eltriple')">Pedir</button>
+                        </div>
+                    </div>
+                    <div class="col-lg-3 col-sm-6 d-flex align-items-stretch">
+                        <div class="oferta card">
+                            <img class="card-img-top" src="./images/barbacoa.jpeg" alt="barbacoa">
+                            <div class="card-body pb-2">
+                                <h5 class="card-title">El Doble</h5>
+                                <p class="card-text mb-0">
+                                    Elige una mediana y recibe otra gratis
+                                </p>
+                                <a href="#" class="card-link">Ver Más</a>
+                            </div>
+                            <button href="#" class="btn btn-danger p-1 mx-2 mb-2"
+                                onclick="addToCart('eldoble')">Pedir</button>
+                        </div>
+                    </div>
+                    <div class="col-lg-3 col-sm-6 d-flex align-items-stretch">
+                        <div class="oferta card">
+                            <img class="card-img-top" src="./images/barbacoa.jpeg" alt="barbacoa">
+                            <div class="card-body pb-2">
+                                <h5 class="card-title">2 Refrescos</h5>
+                                <p class="card-text mb-0">
+                                    Elige 2 refrescos de 2L por 3,95€ c/u
+                                </p>
+                                <a href="#" class="card-link">Ver Más</a>
+                            </div>
+                            <button href="#" class="btn btn-danger p-1 mx-2 mb-2"
+                                onclick="addToCart('2refrescos')">Pedir</button>
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+        </div>
+    </div>
+    <!-- Footer -->
+
+    <div id="footer"></div>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
+        crossorigin="anonymous"></script>
+</body>
+
+>>>>>>> 1bb637725543bdd66d23c35a4119e67b8cc129cc
 </html>

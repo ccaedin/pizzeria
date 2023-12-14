@@ -71,7 +71,7 @@ function mostrarBoton(restauranteId) {
                 type: "recogida"
             }
             window.localStorage.setItem("addressDetails", JSON.stringify(data));
-            window.location.href = 'index.html';
+            window.location.href = 'menu_page/promociones.html';
         });
     }
 }
