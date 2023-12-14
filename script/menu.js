@@ -180,11 +180,16 @@ document.addEventListener("DOMContentLoaded", function () {
                         return null;
                     }
                 }
+                
                 return menuItem;
             }
             for (var product in cart) {
                 var menuItem = getMenuItem(product);
-
+                //if the quanity is 0 remove the product from the cart and continue
+                if (cart[product] == 0) {
+                    delete cart[product];
+                    continue;
+                }
                 if (menuItem == null) {
                     continue;
                 }
