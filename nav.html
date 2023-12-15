@@ -32,11 +32,12 @@
                 </li>
                 <li id="nav-profile" class="nav-item">
                     <!-- Contenedor para acciones de usuario -->
+
                     <div class="user-actions">
                         <!-- Iniciar sesión (oculto) -->
                         <a id="loginLink" class="nav-link" href="/log-in.html">Iniciar sesión</a>
                         <!-- Cerrar sesión (oculto inicialmente) -->
-                        <div class="dropdown" style="display: none;">
+                        <ul class="navbar-item dropdown p-0" style="display: none;">
                             <button class="btn btn-secondary dropdown-toggle" type="button" id="userDropdown" data-bs-toggle="dropdown" aria-expanded="false">
                                 <span id="userEmail">Correo Electrónico</span>
                             </button>
@@ -44,7 +45,7 @@
                                 <li><a class="dropdown-item" href="/log-in.html" id="logoutLink">Cerrar sesión</a></li>
                                 <!-- Otros elementos del menú desplegable si es necesario -->
                             </ul>
-                        </div>
+                        </ul>
                     </div>
                 </li>
                 <li class="nav-item">

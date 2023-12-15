@@ -294,17 +294,15 @@ document.addEventListener("DOMContentLoaded", function () {
         const userEmail = getCookie("userEmail");
 
         if (userEmail) {
-            const fullName = getCookie('fullName');
-            const postalCode = getCookie('postalCode');
-            const address = getCookie('address');
+            var user = JSON.parse(localStorage.getItem("accounts")).find(account => account.email === userEmail);
 
             // Autocompletar los campos del formulario de pago con datos del usuario
-            document.getElementById("nombre").value = fullName || "";
-            document.getElementById("codigo_postal").value = postalCode || "";
-            document.getElementById("direccion").value = address || "";
+            document.getElementById("nombre").value = user.fullName || "";
+            document.getElementById("codigo_postal").value = user.postalCode || "";
+            document.getElementById("direccion").value = user.address || "";
             //if addressDetails is not null, fill the address field with the address
-            if (localStorage.getItem("addressDetails") != null) {
-                var addressDetails = JSON.parse(localStorage.getItem("addressDetails"));
+            if (sessionStorage.getItem("addressDetails") != null) {
+                var addressDetails = JSON.parse(sessionStorage.getItem("addressDetails"));
                 if(addressDetails.type == "recogida"){
                     //change address-header to Recogida
                     document.getElementById("address-header").innerHTML = "Recogida";
@@ -319,11 +317,14 @@ document.addEventListener("DOMContentLoaded", function () {
                 document.getElementById("codigo_postal").value = codePostal;
             }
             //if there is card data
-            if (getCookie("cardNumber")) {
+            
+
+            if (user.cardNumber != null) {
                 // Autocompletar los campos del formulario de pago con datos de la tarjeta
-                document.getElementById("numero_tarjeta").value = getCookie("cardNumber");
-                document.getElementById("date").value = getCookie("cardDate");
-                document.getElementById("ccv").value = getCookie("cardCCV");
+                //get the card data from account in the database
+                document.getElementById("numero_tarjeta").value = user.cardNumber;
+                document.getElementById("date").value = user.cardDate;
+                document.getElementById("ccv").value = user.cardCCV;
             }
         } else {
             // Si el usuario no ha iniciado sesión, redirigir a la página de inicio de sesión
@@ -349,11 +350,7 @@ document.addEventListener("DOMContentLoaded", function () {
 });
 
 // Función para obtener el valor de una cookie por su nombre
-function getCookie(name) {
-    const value = `; ${document.cookie}`;
-    const parts = value.split(`; ${name}=`);
-    if (parts.length === 2) return parts.pop().split(';').shift();
-}
+
 
 function finalizeOrder()
 {
@@ -385,9 +382,17 @@ function finalizeOrder()
             alert("Por favor rellene las detalles de tarjeta");
             return;
         }
-        document.cookie = `cardNumber=${numero_tarjeta}; path=/`;
-        document.cookie = `cardDate=${fecha_caducidad}; path=/`;
-        document.cookie = `cardCCV=${cvv}; path=/`;
+        //if the user is logged in save the card data in the database
+        var email = getCookie("userEmail");
+        if(email != null)
+        {
+            var accounts = JSON.parse(localStorage.getItem("accounts"));
+            var user = accounts.find(account => account.email === email);
+            user.cardNumber = numero_tarjeta;
+            user.cardDate = fecha_caducidad;
+            user.cardCCV = cvv;
+            localStorage.setItem("accounts", JSON.stringify(accounts));
+        }
 
 
     }
