@@ -127,12 +127,17 @@ document.addEventListener("DOMContentLoaded", function () {
         var items = document.getElementById("items");
         var subtotal = document.getElementById("subtotal");
         var delivery = document.getElementById("delivery");
-        if (localStorage.getItem("addressDetails") == null) {
+        //get if the logged in user has an address
+        var userEmail = getCookie("userEmail");
+        var account = JSON.parse(localStorage.getItem("accounts")).find(account => account.email === userEmail);
+
+
+        if (account.address == "") {
             window.location.href = "/?error=address";
         }
         else {
-            var addressDetails = JSON.parse(localStorage.getItem("addressDetails"));
-            if (addressDetails.type == "recogida") {
+            var addressType = localStorage.getItem("addressType");
+            if (addressType == "recogida") {
                 delivery.innerHTML = "Recogida en tienda";
             }
             else {

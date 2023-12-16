@@ -70,8 +70,7 @@ function setAddress() {
     //get the current user from the cookie
     var email = getCookie("userEmail");
     if (email == null) {
-        window.sessionStorage.setItem("addressDetails", JSON.stringify(data));
-        return;
+        window.location.href = "/log-in.html"
     }
     //find the user in the database
     var accounts = JSON.parse(localStorage.getItem("accounts"));
@@ -82,10 +81,9 @@ function setAddress() {
     user.postalCode = codePostal;
     //save the user in the database
     localStorage.setItem("accounts", JSON.stringify(accounts));
+    //save data.type in localstore
+    window.localStorage.setItem("addressType", data.type);
     //set the address in the cookie
-    document.cookie = `address=${address}; path=/`;
-    document.cookie = `postalCode=${codePostal}; path=/`;
-    document.cookie = `type=${data.type}; path=/`;
     
 
 }
