@@ -5,15 +5,71 @@ function getCookie(name) {
     const parts = value.split(`; ${name}=`);
     if (parts.length === 2) return parts.pop().split(';').shift();
 }
-var removeCookie = function(name) {
+function removeCookie(name) {
     document.cookie = name + '=;expires=Thu, 01 Jan 1970 00:00:01 GMT;';
 };
-fetch('/nav.html').then(function (response) {
-    return response.text();
-}).then(function (data) {
+document.addEventListener("DOMContentLoaded", function () {
+    var navText = `
+    <nav id="nav-body" class="navbar sticky-top navbar-expand-lg bg-body-tertiary">
+    <div class="container-fluid">
+        <a class="navbar-brand" href="/">Pizzería</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+            data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
+            aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
+                        aria-expanded="false">
+                        Who we are
+                    </a>
+                    <ul class="dropdown-menu">
+                        <li><a class="dropdown-item" href="/restaurantes.html">Establecimientos</a></li>
+                        <li><a class="dropdown-item" href="/form.html">Atención al Cliente</a></li>
+                        <li><a class="dropdown-item" href="/aboutus.html">Acerca de</a></li>
+                    </ul>
+                </li>
+            </ul>
+            <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+                <li class="nav-item">
+                    <a class="nav-link active" aria-current="page" href="/index.html">Home</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" aria-current="page" href="/menu_page/pizza.html">Carta</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/menu_page/promociones.html">Promociones</a>
+                </li>
+                <li id="nav-profile" class="nav-item">
+                    <!-- Contenedor para acciones de usuario -->
 
+                    <div class="user-actions">
+                        <!-- Iniciar sesión (oculto) -->
+                        <a id="loginLink" class="nav-link" href="/log-in.html">Iniciar sesión</a>
+                        <!-- Cerrar sesión (oculto inicialmente) -->
+                        <ul class="navbar-item dropdown p-0" style="display: none;">
+                            <button class="btn btn-secondary dropdown-toggle" type="button" id="userDropdown" data-bs-toggle="dropdown" aria-expanded="false">
+                                <span id="userEmail">Correo Electrónico</span>
+                            </button>
+                            <ul class="dropdown-menu" aria-labelledby="userDropdown">
+                                <li><a class="dropdown-item" href="#" id="logoutLink">Cerrar sesión</a></li>
+                                <!-- Otros elementos del menú desplegable si es necesario -->
+                            </ul>
+                        </ul>
+                    </div>
+                </li>
+                <li class="nav-item">
+                    <a href="/menu_page/pago.html" class="btn btn-danger">Carrito (<span id='cart-count'>0</span>)</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
 
-    document.getElementById('nav-head').innerHTML = data;
+    `
+    document.getElementById('nav-head').innerHTML = navText;
     //set athe active class on the current page
     var url = window.location.pathname;
     //get the filename from the url but files can be nested into folders
@@ -38,8 +94,7 @@ fetch('/nav.html').then(function (response) {
             cartCount += Number(cart[product]);
         }
     }
-    else
-    {
+    else {
         cartCount = 0;
     }
     document.getElementById('cart-count').innerHTML = cartCount;
@@ -67,14 +122,19 @@ fetch('/nav.html').then(function (response) {
             window.location.href = '/log-in.html';
         });
     }
-});
-fetch('/footer.html').then(function (response) {
-    return response.text();
-}).then(function (data) {
+    var footerText = `
+    <footer class="mt-auto pt-3 border-top">
+    <p class="text-center text-muted">© 2021 Pizzeria</p>
+    <ul class="nav justify-content-between border-bottom pb-3 px-5 bg-secondary">
+        <li class="nav-item"><a href="/" class="nav-link px-2 text-muted">Home</a></li>
+        <li class="nav-item"><a href="/menu_page/promociones.html" class="nav-link px-2 text-muted">Productos</a></li>
+        <li class="nav-item"><a href="/menu_page/promociones.html" class="nav-link px-2 text-muted">Nutricion y calidad</a></li>
+        <li class="nav-item"><a href="/privacy.html" class="nav-link px-2 text-muted">Aviso legal</a></li>
+        <li class="nav-item"><a href="/privacy.html" class="nav-link px-2 text-muted">Privacidad</a></li>
+    </ul>
+    </footer>
+    `
     var footer = document.getElementById('footer')
-    if (footer == null) {
-        return;
-    }
-    footer.innerHTML = data;
+    footer.innerHTML = footerText;
     footer.classList.add('mt-auto');
 });
