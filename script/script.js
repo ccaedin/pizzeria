@@ -64,6 +64,7 @@ fetch('/nav.html').then(function (response) {
             // Elimina las cookies al cerrar sesión
             removeCookie('userEmail');
             removeCookie('isLoggedIn');
+            window.location.href = '/log-in.html';
         });
     }
 });
