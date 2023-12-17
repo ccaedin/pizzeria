@@ -74,6 +74,9 @@ document.addEventListener("DOMContentLoaded", function () {
     var url = window.location.pathname;
     //in nav-head find the link that is the same as the hr
     //find the a tag that has href = url
+    if(pathname = "/"){
+        url = "/index.html";
+    }
     var links = document.querySelectorAll('#nav-head a');
     links.forEach(link => {
         if (link.href.includes(url)) {
