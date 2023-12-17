@@ -118,7 +118,37 @@ var menu = {
         },
     ]
 }
+function getMenuItem(product) { //get the menu item from the menu object that has same name as the product
+    var menuItem = menu.pizzas.find(item => item.title == product);
+    if (menuItem == undefined) {
+        menuItem = menu.postres.find(item => item.title == product);
+    }
+    if (menuItem == undefined) {
+        menuItem = menu.drinks.find(item => item.title == product);
+    }
+    if (menuItem == undefined) {
+        menuItem = menu.offers.find(item => item.title == product);
+    }
+    if (menuItem == undefined) {
+        //if product contains Pizza Personalizada
+        if (product.includes("Pizza Personalizada")) {
+            menuItem = {
+                title: product,
+                description: "Pizza Personalizada",
+                image: "/images/pizza-frabisa.jpg",
+                price: "8.95",
+                //id is the title without spaces
+                id: product.replace(/\s/g, '')
+            }
 
+        }
+        else {
+            alert("Error: " + product + " not found in menu");
+            return null;
+        }
+    }
+    return menuItem;
+}
 document.addEventListener("DOMContentLoaded", function () {
     //if the page location comtains menu_page/pago.html
     if (window.location.pathname.includes("menu_page/pago.html")) {
@@ -158,37 +188,8 @@ document.addEventListener("DOMContentLoaded", function () {
         //if the cart is not empty
         else {
 
-            var getMenuItem = (product) => { //get the menu item from the menu object that has same name as the product
-                var menuItem = menu.pizzas.find(item => item.title == product);
-                if (menuItem == undefined) {
-                    menuItem = menu.postres.find(item => item.title == product);
-                }
-                if (menuItem == undefined) {
-                    menuItem = menu.drinks.find(item => item.title == product);
-                }
-                if (menuItem == undefined) {
-                    menuItem = menu.offers.find(item => item.title == product);
-                }
-                if (menuItem == undefined) {
-                    //if product contains Pizza Personalizada
-                    if (product.includes("Pizza Personalizada")) {
-                        menuItem = {
-                            title: product,
-                            description: "Pizza Personalizada",
-                            image: "/images/pizza-frabisa.jpg",
-                            price: "8.95",
-                        }
-
-                    }
-                    else {
-                        alert("Error: " + product + " not found in menu");
-                        return null;
-                    }
-                }
-                return menuItem;
-            }
             for (var product in cart) {
-                var menuItem = getMenuItem(product);
+                let menuItem = getMenuItem(product);
 
                 if (menuItem == null) {
                     continue;
@@ -199,6 +200,7 @@ document.addEventListener("DOMContentLoaded", function () {
                 var card = document.createElement("div");
                 card.classList.add("card");
                 card.classList.add("mt-2");
+                card.id = menuItem.id;
 
                 var row = document.createElement("div");
                 row.classList.add("row");
@@ -234,6 +236,7 @@ document.addEventListener("DOMContentLoaded", function () {
                 cardText.classList.add("card-text");
                 var label = document.createElement("label");
                 label.innerHTML = "Quantity: ";
+                label.classList.add("form-label");
                 var br = document.createElement("br");
                 var input = document.createElement("input");
                 input.id = menuItem.id + "-quantity";
@@ -244,14 +247,67 @@ document.addEventListener("DOMContentLoaded", function () {
                 subtotal.innerHTML = Number(subtotal.innerHTML) + Number(menuItem.price) * Number(cart[product]);
                 subtotal.innerHTML = Math.round(subtotal.innerHTML * 100) / 100;
                 numberItems.innerHTML = Number(numberItems.innerHTML) + Number(cart[product]);
-
+                input.classList.add("w-25");
                 input.min = "1";
                 input.max = "10";
                 input.disabled = true;
-                
+                input.classList.add("form-control");
+
+
+                // Add increment button
+                var incrementButton = document.createElement("button");
+                incrementButton.classList.add("btn");
+                incrementButton.classList.add("btn-danger");
+                incrementButton.id = menuItem.id + "-increment";
+                incrementButton.innerHTML = "+";
+                incrementButton.addEventListener("click", function () {
+                    incrementQuantity(menuItem);
+                });
+                //disabled if the quantity is 10
+                if (cart[product] == 10) {
+                    incrementButton.disabled = true;
+                }
+
+                // Add decrement button
+                var decrementButton = document.createElement("button");
+                decrementButton.innerHTML = "-";
+                decrementButton.id = menuItem.id + "-decrement";
+                decrementButton.classList.add("btn");
+                decrementButton.classList.add("btn-danger");
+                decrementButton.addEventListener("click", function () {
+                    decrementQuantity(menuItem);
+                });
+                //disabled if the quantity is 1
+                if (cart[product] == 1) {
+                    decrementButton.disabled = true;
+                }
+
+                //add a trash button with font awesome icon
+                let trashButton = document.createElement("button");
+                trashButton.classList.add("btn");
+                trashButton.classList.add("btn-danger");
+                // trashButton.classList.add("ml-2");
+                trashButton.innerHTML = "<i class=\"fa fa-trash\"></i>";
+                trashButton.classList.add("ms-auto");
+
+                trashButton.addEventListener("click", function () {
+                    //remove the item from the cart
+                    updateCart(menuItem, -11);
+                });
+                // Append buttons to cardText
+                //create a div for the buttons and input
+                var buttonDiv = document.createElement("div");
+                buttonDiv.classList.add("d-flex");
+                buttonDiv.classList.add("align-items-center");
+                // buttonDiv.classList.add("w-50");
+                buttonDiv.appendChild(incrementButton);
+                buttonDiv.appendChild(input);
+                buttonDiv.appendChild(decrementButton);
+                buttonDiv.appendChild(trashButton);
+
                 cardText.appendChild(label);
                 cardText.appendChild(br);
-                cardText.appendChild(input);
+                cardText.appendChild(buttonDiv);
                 // cardText.appendChild(a);
                 cardBody.appendChild(cardTitle);
                 cardBody.appendChild(cardSubtitle);
@@ -295,7 +351,7 @@ document.addEventListener("DOMContentLoaded", function () {
             document.getElementById("date").disabled = true;
             document.getElementById("ccv").disabled = true;
         });
-        
+
         const userEmail = getCookie("userEmail");
 
         if (userEmail) {
@@ -308,13 +364,13 @@ document.addEventListener("DOMContentLoaded", function () {
             //if addressDetails is not null, fill the address field with the address
             if (sessionStorage.getItem("addressDetails") != null) {
                 var addressDetails = JSON.parse(sessionStorage.getItem("addressDetails"));
-                if(addressDetails.type == "recogida"){
+                if (addressDetails.type == "recogida") {
                     //change address-header to Recogida
                     document.getElementById("address-header").innerHTML = "Recogida";
                     //get and remove the code postal field and its label
 
                 }
-                    //changed 
+                //changed 
                 document.getElementById("direccion").value = addressDetails.address;
                 //set the code postal field to the code postal from the address
                 //get the code postal from the address, the longest string of numbers
@@ -322,7 +378,7 @@ document.addEventListener("DOMContentLoaded", function () {
                 document.getElementById("codigo_postal").value = codePostal;
             }
             //if there is card data
-            
+
 
             if (user.cardNumber != null) {
                 // Autocompletar los campos del formulario de pago con datos de la tarjeta
@@ -345,7 +401,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
 
     //if page is pagofinal
-    if(window.location.pathname.includes("menu_page/pagofinal.html")){
+    if (window.location.pathname.includes("menu_page/pagofinal.html")) {
         //get the total from the session storage
         // document.getElementById("number-items").innerHTML = sessionStorage.getItem("numberItems");
         document.getElementById("confirmation-subtotal").innerHTML = sessionStorage.getItem("subtotal");
@@ -357,14 +413,12 @@ document.addEventListener("DOMContentLoaded", function () {
 // Función para obtener el valor de una cookie por su nombre
 
 
-function finalizeOrder()
-{
+function finalizeOrder() {
     //if all the fields are filled redirect to /menu_page/pagofinal.html
     var nombre = document.getElementById("nombre").value;
     var codigo_postal = document.getElementById("codigo_postal").value;
     var direccion = document.getElementById("direccion").value;
-    if(nombre == "" || codigo_postal == "" || direccion == "")
-    {
+    if (nombre == "" || codigo_postal == "" || direccion == "") {
         alert("Por favor rellene todos los campos");
         return;
     }
@@ -372,25 +426,21 @@ function finalizeOrder()
     var efectivo = document.getElementById("en_efectivo").checked;
     var tarjeta = document.getElementById("con_tarjeta").checked;
     //if neither efectivo or tarjeta is checked alert the user
-    if(!efectivo && !tarjeta)
-    {
+    if (!efectivo && !tarjeta) {
         alert("Por favor seleccione un método de pago");
         return;
     }
-    if(tarjeta)
-    {
+    if (tarjeta) {
         var numero_tarjeta = document.getElementById("numero_tarjeta").value;
         var fecha_caducidad = document.getElementById("date").value;
         var cvv = document.getElementById("ccv").value;
-        if(numero_tarjeta == "" || fecha_caducidad == "" || cvv == "")
-        {
+        if (numero_tarjeta == "" || fecha_caducidad == "" || cvv == "") {
             alert("Por favor rellene las detalles de tarjeta");
             return;
         }
         //if the user is logged in save the card data in the database
         var email = getCookie("userEmail");
-        if(email != null)
-        {
+        if (email != null) {
             var accounts = JSON.parse(localStorage.getItem("accounts"));
             var user = accounts.find(account => account.email === email);
             user.cardNumber = numero_tarjeta;
@@ -404,5 +454,102 @@ function finalizeOrder()
     document.location = "/menu_page/pagofinal.html";
 }
 
+function incrementQuantity(product) {
+    var inputElement = document.getElementById(product.id + "-quantity");
+    var currentQuantity = parseInt(inputElement.value);
+    if (currentQuantity < 10) {
+        inputElement.value = currentQuantity + 1;
+        updateCart(product, 1);
+    }
+    //if the quantity is 10 disable the button
+    if (currentQuantity == 9) {
+        document.getElementById(product.id + "-increment").disabled = true;
+    }
+    else {
+        document.getElementById(product.id + "-decrement").disabled = false;
+    }
+}
+
+function decrementQuantity(product) {
+    var inputElement = document.getElementById(product.id + "-quantity");
+    var currentQuantity = parseInt(inputElement.value);
+    if (currentQuantity > 1) {
+        inputElement.value = currentQuantity - 1;
+        updateCart(product, -1);
+    }
+
+    //if the quantity is 1 disable the button
+    if (currentQuantity == 2) {
+        document.getElementById(product.id + "-decrement").disabled = true;
+    }
+    else {
+        document.getElementById(product.id + "-increment").disabled = false;
+    }
+}
+
+function updateCart(product, quantityChange) {
+    var cart = JSON.parse(localStorage.getItem("cart")) || {};
+    var currentQuantity = cart[product.title] || 0;
+
+    // Update the quantity in the cart
+    var newQuantity = currentQuantity + quantityChange;
+    if (newQuantity <= 0) {
+        // Remove the item from the cart if the quantity becomes zero or negative
+        delete cart[product.title];
+        document.getElementById(product.id).remove();
+    } else {
+        cart[product.title] = newQuantity;
+    }
+
+    // Save the updated cart back to localStorage
+    localStorage.setItem("cart", JSON.stringify(cart));
+    var cartCount = 0;
+    for (var product in cart) {
+        cartCount += Number(cart[product]);
+    }
+    document.getElementById('cart-count').innerHTML = cartCount;
+    // Recalculate the subtotal
+    var subtotal = 0;
+    for (var item in cart) {
+        var menuItem = getMenuItem(item);
+        if (menuItem) {
+            subtotal += menuItem.price * cart[item];
+        }
+    }
+
+    // Update the subtotal on the page
+    var subtotalElement = document.getElementById("subtotal");
+    if (subtotalElement) {
+        subtotalElement.innerHTML = Math.round(subtotal * 100) / 100;
+    }
+
+    // Update the total if delivery is not "Recogida en tienda"
+    var delivery = document.getElementById("delivery").innerHTML;
+    var total = document.getElementById("total");
+    if (total) {
+        if (delivery !== "Recogida en tienda") {
+            total.innerHTML = Math.round((subtotal + parseFloat(delivery)) * 100) / 100;
+        } else {
+            total.innerHTML = Math.round(subtotal * 100) / 100;
+        }
+    }
+
+    // Update the number of items
+    var numberItems = document.getElementById("number-items");
+    if (numberItems) {
+        var itemCount = Object.values(cart).reduce((acc, val) => acc + val, 0);
+        numberItems.innerHTML = itemCount;
+    }
+
+    // Update sessionStorage after updating the cart
+    sessionStorage.setItem("total", total.innerHTML);
+    sessionStorage.setItem("subtotal", subtotalElement.innerHTML); // Actualiza la variable subtotalElement en lugar de subtotal
+    sessionStorage.setItem("numberItems", numberItems.innerHTML);
+
+    // If delivery is not "Recogida en tienda", update delivery in sessionStorage
+    if (delivery !== "Recogida en tienda") {
+        sessionStorage.setItem("delivery", delivery);
+    }
+}
 
 

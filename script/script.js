@@ -34,7 +34,7 @@ document.addEventListener("DOMContentLoaded", function () {
             </ul>
             <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
                 <li class="nav-item">
-                    <a class="nav-link active" aria-current="page" href="/index.html">Home</a>
+                    <a class="nav-link" href="/index.html">Home</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" aria-current="page" href="/menu_page/pizza.html">Carta</a>
@@ -72,20 +72,17 @@ document.addEventListener("DOMContentLoaded", function () {
     document.getElementById('nav-head').innerHTML = navText;
     //set athe active class on the current page
     var url = window.location.pathname;
-    //get the filename from the url but files can be nested into folders
-    var filename = url.substring(url.lastIndexOf('/') + 1);
-
-    var navItems = document.getElementById("nav-body").getElementsByClassName('nav-item');
-    for (var i = 0; i < navItems.length; i++) {
-        var tag = navItems[i].getElementsByTagName('a')[0];
-        if (tag != null && tag.hasAttribute('href')) {
-            var href = tag.getAttribute('href');
-            //if url contains the href
-            if (filename.includes(href)) {
-                navItems[i].classList.add('active');
-            }
+    //in nav-head find the link that is the same as the hr
+    //find the a tag that has href = url
+    var links = document.querySelectorAll('#nav-head a');
+    links.forEach(link => {
+        if (link.href.includes(url)) {
+            link.classList.add('active');
+            //add aria 
+            link.setAttribute('aria-current', 'page');
         }
-    }
+    });
+    
     //if contains menu_page than set Carta to active
     if (localStorage.getItem("cart") != null) {
         var cart = JSON.parse(localStorage.getItem("cart"));
