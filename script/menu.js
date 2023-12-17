@@ -552,4 +552,14 @@ function updateCart(product, quantityChange) {
     }
 }
 
-
+function continueToPago()
+{
+    //if there are items in the cart
+    if (sessionStorage.getItem("numberItems") > 0) {
+        //redirect to the address page
+        window.location.href = "/menu_page/pagopago.html";
+    }
+    else {
+        alert("No hay productos en el carrito");
+    }
+}
